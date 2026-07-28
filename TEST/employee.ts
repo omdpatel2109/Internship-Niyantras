@@ -27,13 +27,14 @@ const employeeTitle = document.getElementById('employeeTitle') as HTMLInputEleme
 const addEmployeeButton = document.getElementById('addEmployeeButton') as HTMLButtonElement;
 const addApiButton = document.getElementById('addApiButton') as HTMLButtonElement;
 //table data
-const employeeTable = document.getElementById('employeeTable') as HTMLTableSectionElement;
+const employeeTable = document.getElementById('employeeTable') as HTMLTableElement;
 const employeeTableBody = document.getElementById('employeeTableBody') as HTMLTableSectionElement;
 const firstName = document.getElementById('firstName') as HTMLTableCellElement;
 const lastName = document.getElementById('lastName') as HTMLTableCellElement;
 const email = document.getElementById('email') as HTMLTableCellElement;
 const department = document.getElementById('department') as HTMLTableCellElement;
 const title = document.getElementById('title') as HTMLTableCellElement; 
+const removeEmpButton = document.getElementById('removeEmpButton') as HTMLButtonElement;
 
 //function to add an employee to the employee table
 function addEmployee (employee: Employee): void {
@@ -44,8 +45,8 @@ function addEmployee (employee: Employee): void {
     const emailCell: HTMLTableCellElement = document.createElement('td');
     const departmentCell: HTMLTableCellElement = document.createElement('td');
     const titleCell: HTMLTableCellElement = document.createElement('td');
-    
-    if(!employee.firstName || !employee.lastName || !employee.email || !employee.company.department || !employee.company.title){
+
+        if(!employee.firstName || !employee.lastName || !employee.email || !employee.company.department || !employee.company.title){
         alert('Please fill in all fields before adding an employee.');
         return;
     }
@@ -63,8 +64,8 @@ function addEmployee (employee: Employee): void {
     row.appendChild(departmentCell);
     row.appendChild(titleCell);
     
-    //append the row to the employee table
-    employeeTable.appendChild(row);
+    //append the row to the employee table body
+    employeeTableBody.appendChild(row);
 
     //clear the input fields after adding the employee
     employeeName.value = '';
@@ -101,7 +102,8 @@ async function fetchEmp() : Promise<void> {
         empData.forEach((emp: Employee): void => {
             addEmployee(emp);
         })
-
+        // employeeTable.innerHTML = '';
+        // employeeTableBody.remove();
     }catch(error){
         alert(`Error fetching employee data: ${error}`);
     }
@@ -137,3 +139,13 @@ filterDepartment.addEventListener('input', () => {
         }
     }
 });
+
+
+// Remove button
+const remove = (): void => {
+    if (confirm("Remove all employees?")) {
+        employeeTableBody.innerHTML = "";
+    }
+};
+
+removeEmpButton.addEventListener("click", remove);

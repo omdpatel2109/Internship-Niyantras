@@ -14,6 +14,7 @@ const lastName = document.getElementById('lastName');
 const email = document.getElementById('email');
 const department = document.getElementById('department');
 const title = document.getElementById('title');
+const removeEmpButton = document.getElementById('removeEmpButton');
 //function to add an employee to the employee table
 function addEmployee(employee) {
     //create a new row in the employee table and populate it with the employee data
@@ -40,7 +41,7 @@ function addEmployee(employee) {
     row.appendChild(departmentCell);
     row.appendChild(titleCell);
     //append the row to the employee table
-    employeeTable.appendChild(row);
+    employeeTableBody.appendChild(row);
     //clear the input fields after adding the employee
     employeeName.value = '';
     employeeLastName.value = '';
@@ -76,6 +77,8 @@ async function fetchEmp() {
         empData.forEach((emp) => {
             addEmployee(emp);
         });
+        // employeeTable.innerHTML = '';
+        // employeeTableBody.remove();
     }
     catch (error) {
         alert(`Error fetching employee data: ${error}`);
@@ -112,3 +115,10 @@ filterDepartment.addEventListener('input', () => {
         }
     }
 });
+// Remove button
+const remove = () => {
+    if (confirm("Remove all employees?")) {
+        employeeTableBody.innerHTML = "";
+    }
+};
+removeEmpButton.addEventListener("click", remove);

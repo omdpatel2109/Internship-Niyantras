@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of items</title>
+    <!-- <script src="DAY_1.js"defer></script> -->
+    <script src="DAY_3.js"defer></script>
+    <link rel="stylesheet" href="DAY_1.css">
+</head>
+<body>
+    <div class="mainDiv">
+        <h1 class="heading">Items of List</h1>
+        <div class="item-div">
+            <label>Enter list item:</label>
+            <input type="text" id="item" placeholder="Enter item here..">
+            <br>
+            <button type="submit" id="addButton">Add</button>
+        </div>
+        <div class="list-item">
+            <h2>Your Items:</h2>
+            <ul id="addedItem">
+            </ul>
+        </div>
+        <div class="sortItemDiv">
+            <h2 id="text"></h2>
+            <ul id="sortItem"></ul>
+            <button id="sortButton">Sort</button>
+        </div>
+        <div class="apiDiv">
+            <h2>API Data:</h2>
+            <ul id="apiData"></ul>
+            <button type="submit" id="apiButton">Get api data</button>
+        </div>
+        <div class="combinedDataDiv">
+            <h2>Combined Data:</h2>
+            <ul id="combinedDataList"></ul>
+        </div>
+
+        <!-- <div class="filterDiv">
+            <h2>Cheap products:</h2>
+            <ul id="cheapProductsList"></ul>
+            <button type="submit" id="filterButton">Cheap Products(<100)</button>
+        </div> -->
+
+    </div>
+</body>
+</html>

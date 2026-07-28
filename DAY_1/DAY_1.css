@@ -1,0 +1,42 @@
+.heading{
+    text-align: center;
+    color: rgb(10, 83, 167);
+    background-color: powderblue;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#addButton, #sortButton, #apiButton,#filterButton {
+    margin-top: 10px;
+    padding: 8px 18px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#addButton:hover, #sortButton:hover, #apiButton:hover ,#filterButton:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#addButton:active, #sortButton:active, #apiButton:active, #filterButton:active {
+    transform: scale(0.98);
+}
+
+.sortItemDiv, .apiDiv, .combinedDataDiv, .list-item, .filterDiv {
+    background-color: powderblue;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#apiData li, #combinedDataList li, #sortItem li, #addedItem li, #cheapProductsList li {
+    margin: 10px 0;
+}
+
+

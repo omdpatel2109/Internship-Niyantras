@@ -83,8 +83,7 @@ async function fetchEmp() {
     catch (error) {
         alert(`Error fetching employee data: ${error}`);
     }
-}
-;
+};
 addApiButton.addEventListener('click', () => {
     const apiEmp = {
         firstName: employeeName.value,

@@ -32,61 +32,72 @@ export default function EmployeeForm({
   return (
     <>
       <h2>Add Employee</h2>
-      <label>Enter First Name:</label>
-      <input
-        placeholder="First Name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
+      <div className="form-group">
+        <label>Enter First Name:</label>
+        <input
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        </div>
 
-      <br />
-      <br />
-      <label>Enter Last Name:</label>
-      <input
-        placeholder="Last Name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
+        <br />
+        <br />
+        <div className="form-group">
+        <label>Enter Last Name:</label>
+        <input
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        </div>
 
-      <br />
-      <br />
+        <br />
+        <br />
+        <div className="form-group">
+        <label>Enter Email:</label>
+        <input
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        </div>
 
-      <label>Enter Email:</label>
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <br />
+        <br />
+        <div className="form-group">
+        <label>Enter Department:</label>
+        <input
+          placeholder="Department"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
+        />
+        </div>
 
-      <br />
-      <br />
+        <br />
+        <br />
+        <div className="form-group">
+        <label>Enter Title:</label>
+        <input
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        </div>
 
-      <label>Enter Department:</label>
-      <input
-        placeholder="Department"
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-      />
+        <br />
+        <br />
+      
 
-      <br />
-      <br />
+    <div className="button-group">
 
-      <label>Enter Title:</label>
-      <input
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <button onClick={addEmployee}>Add Employee</button>
+        <button onClick={addEmployee}>Add Employee</button>
 
 
-    <button onClick={fetchEmp}>
-        Fetch Employees
-    </button>
+        <button onClick={fetchEmp}>
+          Fetch Employees
+        </button>
+    </div>
     </>
   );
 }

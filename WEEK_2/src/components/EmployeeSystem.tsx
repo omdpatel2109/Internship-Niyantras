@@ -14,6 +14,7 @@ export type Employee = {
 
 export default function EmployeeSystem() {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [filterDepartment, setFilterDepartment] = useState("");
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -81,32 +82,48 @@ export default function EmployeeSystem() {
   }
 }
 
+const filteredEmployees = employees.filter((emp) => {
+  if (filterDepartment === "") return true;
+
+  return emp.company.department
+    .toLowerCase()
+    .includes(filterDepartment.toLowerCase());
+});
+
     return (
   <div className="container">
     <div className="header">
       <h1>Employee Management System</h1>
       <p>Welcome to the Employee Management System!</p>
     </div>
+    <div className="employee-form">    
+      <EmployeeForm
+        firstName={firstName}
+        lastName={lastName}
+        email={email}
+        department={department}
+        title={title}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
+        setEmail={setEmail}
+        setDepartment={setDepartment}
+        setTitle={setTitle}
+        addEmployee={addEmployee}
+        fetchEmp={fetchEmp}
+      />
+    </div>
 
-    <EmployeeForm
-      firstName={firstName}
-      lastName={lastName}
-      email={email}
-      department={department}
-      title={title}
-      setFirstName={setFirstName}
-      setLastName={setLastName}
-      setEmail={setEmail}
-      setDepartment={setDepartment}
-      setTitle={setTitle}
-      addEmployee={addEmployee}
-      fetchEmp={fetchEmp}
-    />
-
+      <div className="employee-table">
     <EmployeeList
-      employees={employees}
+      // employees={employees}
+      // removeEmployees={removeEmployees}
+      employees={filteredEmployees}
+      filterDepartment={filterDepartment}
+      setFilterDepartment={setFilterDepartment}
       removeEmployees={removeEmployees}
+
     />
+    </div>
   </div>
 );
 }

@@ -1,4 +1,5 @@
 import EmployeeRow from "./EmployeeRow";
+import { useEmployeeContext } from "../context/EmployeeContext";
 
 type Employee = {
   firstName: string;
@@ -10,19 +11,20 @@ type Employee = {
   };
 };
 
-type Props = {
-  employees: Employee[];
-  filterDepartment: string;
-  setFilterDepartment: React.Dispatch<React.SetStateAction<string>>;
-  removeEmployees: () => void;
-};
+// type Props = {
+//   employees: Employee[];
+//   filterDepartment: string;
+//   setFilterDepartment: React.Dispatch<React.SetStateAction<string>>;
+//   removeEmployees: () => void;
+// };
 
-export default function EmployeeList({
-  employees,
+export default function EmployeeList() {
+  const {
+  filteredEmployees,
   filterDepartment,
   setFilterDepartment,
   removeEmployees,
-}: Props) {
+} = useEmployeeContext();
   return (
     <div className="employee-table">
       <h2>Employee List</h2>
@@ -59,7 +61,7 @@ export default function EmployeeList({
         </thead>
 
         <tbody>
-          {employees.map((employee, index) => (
+          {filteredEmployees.map((employee, index) => (
             <EmployeeRow key={index} employee={employee} />
           ))}
         </tbody>

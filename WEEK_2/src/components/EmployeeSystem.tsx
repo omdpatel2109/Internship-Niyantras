@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import EmployeeForm from "./EmployeeForm";
 import EmployeeList from "./EmployeeList";
-import useEmployees from '../hooks/Employee';
+// import useEmployees from '../hooks/Employee';
+import { useEmployeeContext } from "../context/EmployeeContext";
+// import type { Employee } from "../type";
 
-export type Employee = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: {
-    department: string;
-    title: string;
-  };
-};
+// export type Employee = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   company: {
+//     department: string;
+//     title: string;
+//   };
+// };
 
 export default function EmployeeSystem() {
   // const [employees, setEmployees] = useState<Employee[]>([]);
@@ -30,7 +32,7 @@ export default function EmployeeSystem() {
   addEmployee,
   removeEmployees,
   fetchEmployees,
-} = useEmployees();
+} = useEmployeeContext();
 
   function handleAddEmployee() {
   if (!firstName || !lastName || !email || !department || !title) {
@@ -155,15 +157,7 @@ export default function EmployeeSystem() {
     </div>
 
       <div className="employee-table">
-    <EmployeeList
-      // employees={employees}
-      // removeEmployees={removeEmployees}
-      employees={filteredEmployees}
-      filterDepartment={filterDepartment}
-      setFilterDepartment={setFilterDepartment}
-      removeEmployees={removeEmployees}
-
-    />
+    <EmployeeList/>
     </div>
   </div>
 );

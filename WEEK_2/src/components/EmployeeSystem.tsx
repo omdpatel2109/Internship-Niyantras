@@ -130,34 +130,51 @@ export default function EmployeeSystem() {
 //     .includes(filterDepartment.toLowerCase());
 // });
 
-    return (
-  <div className="container">
-    <div className="header">
-      <h1>Employee Management System</h1>
-      <p>Welcome to the Employee Management System!</p>
-    </div>
-    <div className="employee-form">    
-      <EmployeeForm
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        department={department}
-        title={title}
+return (
+  <div className="min-h-screen w-full bg-[#f4f6f9] px-[30px] py-[30px] font-sans">
 
-        setFirstName={setFirstName}
-        setLastName={setLastName}
-        setEmail={setEmail}
-        setDepartment={setDepartment}
-        setTitle={setTitle}
+    {/* Main centered container */}
+    <div className="mx-auto w-full max-w-[900px]">
 
-        addEmployee={handleAddEmployee}
-        fetchEmp={fetchEmployees}
-      
-      />
-    </div>
+      {/* Header */}
+      <header className="mb-[30px] text-center">
+        <h1 className="mb-[10px] text-[28px] font-bold text-[#333]">
+          Employee Management System
+        </h1>
 
-      <div className="employee-table">
-    <EmployeeList/>
+        <p className="text-[16px] text-[#666]">
+          Welcome to the Employee Management System!
+        </p>
+      </header>
+
+      {/* Employee Form */}
+      <section
+        aria-labelledby="add-employee-heading"
+        className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
+      >
+        <EmployeeForm
+          firstName={firstName}
+          lastName={lastName}
+          email={email}
+          department={department}
+          title={title}
+
+          setFirstName={setFirstName}
+          setLastName={setLastName}
+          setEmail={setEmail}
+          setDepartment={setDepartment}
+          setTitle={setTitle}
+
+          addEmployee={handleAddEmployee}
+          fetchEmp={fetchEmployees}
+        />
+      </section>
+
+      {/* Employee List */}
+      <section className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
+        <EmployeeList />
+      </section>
+
     </div>
   </div>
 );

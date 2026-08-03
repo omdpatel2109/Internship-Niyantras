@@ -19,7 +19,7 @@ type EmployeeContextType = {
 const EmployeeContext = createContext<EmployeeContextType | null>(null);
 
 type Props = {
-  children: ReactNode;
+  children: ReactNode; //render anything
 };
 
 export function EmployeeProvider({ children }: Props) {
@@ -33,7 +33,7 @@ export function EmployeeProvider({ children }: Props) {
 }
 
 export function useEmployeeContext() {
-    const employeeData = useEmployees();
+  const employeeData = useEmployees();
   const context = useContext(EmployeeContext);
 
   if (!context) {

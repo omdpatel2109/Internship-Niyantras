@@ -1,5 +1,6 @@
 import EmployeeRow from "./EmployeeRow";
 import { useEmployeeContext } from "../context/EmployeeContext";
+import EmployeeSearch from "./EmployeeSearch";
 
 // type Employee = {
 //   firstName: string;
@@ -20,10 +21,14 @@ import { useEmployeeContext } from "../context/EmployeeContext";
 
 export default function EmployeeList() {
   const {
-  filteredEmployees,
-  filterDepartment,
-  setFilterDepartment,
-  removeEmployees,
+    filteredEmployees,
+    filterDepartment,
+    setFilterDepartment,
+    removeEmployees,
+    searchEmployee,
+    searchEmp,
+    setSearchEmp,
+    removeSearch,
 } = useEmployeeContext();
 return (
   <div className="bg-white p-[25px] rounded-[8px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
@@ -36,6 +41,9 @@ return (
 </h2>
 
     <div className="mb-[20px]">
+
+      <EmployeeSearch />
+      
 
       <select
         className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full"

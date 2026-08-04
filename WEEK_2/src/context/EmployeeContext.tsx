@@ -9,15 +9,23 @@ import type { ReactNode } from "react";
 type EmployeeContextType = {
   employees: Employee[];
   filteredEmployees: Employee[];
+
   filterDepartment: string;
   setFilterDepartment: React.Dispatch<React.SetStateAction<string>>;
+
+  searchEmp: string;
+  setSearchEmp: React.Dispatch<React.SetStateAction<string>>;
 
   addEmployee: (employee: Employee) => void;
   removeEmployees: () => void;
   fetchEmployees: () => void;
+
+  searchEmployee: () => void;
+  removeSearch: () => void;
+
 };
 
-const EmployeeContext = createContext<EmployeeContextType | null>(null);
+const EmployeeContext = createContext<EmployeeContextType |null>(null);
 
 type Props = {
   children: ReactNode; //render anything

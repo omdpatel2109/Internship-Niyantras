@@ -9,10 +9,11 @@ export type Employee = {
     title: string;
   };
 };
-
 export default function useEmployee(){
     const [employees, setEmployees] = useState<Employee[]>([]);
     const [filterDepartment, setFilterDepartment] = useState("");
+    const [searchEmp, setSearchEmp] = useState("");
+    const [allEmployee, setAllEmployee] = useState<Employee[]>([]); //for when clear the search automatic show all the list
 
     //add employee
     function addEmployee(employee: Employee){
@@ -46,6 +47,7 @@ export default function useEmployee(){
             }));
 
             setEmployees(apiEmployees);
+            setAllEmployee(apiEmployees); // Store the fetched employees in allEmployee state
 
         }catch(error){
             alert("Error fetching employees");
@@ -66,14 +68,52 @@ export default function useEmployee(){
         .includes(filterDepartment.toLowerCase());
     })
 
+
+    //search employee by firstname, lastname, title, email ,department
+    function searchEmployee() {
+        const searchResult = allEmployee.filter((emp) => {
+            const search = searchEmp.toLocaleLowerCase();
+
+            return (
+                emp.firstName.toLowerCase().includes(search) ||
+                emp.lastName.toLowerCase().includes(search) ||
+                emp.email.toLowerCase().includes(search) ||
+                emp.company.department.toLowerCase().includes(search) ||
+                emp.company.title.toLowerCase().includes(search)
+            );
+        });
+
+        setEmployees(searchResult);
+
+        if(searchResult.length === 0){
+            // setEmployees([]);
+            alert("No employees found");
+        }
+        if(searchEmp === ''){
+            setEmployees(allEmployee);
+        }   
+    }
+        
+    
+        //remove search
+        function removeSearch(){
+            setSearchEmp('');
+            setEmployees(allEmployee);
+        }
+
+
     return {
-    employees,
-    filteredEmployees,
-    filterDepartment,
-    setFilterDepartment,
-    addEmployee,
-    removeEmployees,
-    fetchEmployees,
-  };
+        employees,
+        filteredEmployees,
+        filterDepartment,
+        setFilterDepartment,
+        addEmployee,
+        removeEmployees,
+        fetchEmployees,
+        searchEmp,
+        setSearchEmp,
+        searchEmployee,
+        removeSearch
+    };
 }
 

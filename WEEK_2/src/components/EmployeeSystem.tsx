@@ -26,12 +26,9 @@ export default function EmployeeSystem() {
   const [title, setTitle] = useState("");
 
   const {
-  filteredEmployees,
-  filterDepartment,
-  setFilterDepartment,
-  addEmployee,
-  removeEmployees,
-  fetchEmployees,
+   addEmployee,
+   fetchEmployees,
+ 
 } = useEmployeeContext();
 
   function handleAddEmployee() {

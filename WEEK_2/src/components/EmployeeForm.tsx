@@ -159,7 +159,8 @@ export default function EmployeeForm({
           <div className="mt-[30px] flex w-full gap-[15px] max-[768px]:flex-col">
             <button
               type="submit"
-              className="cursor-pointer rounded-[5px] border-0 bg-[#0078d4] px-[18px] py-[10px] text-white transition duration-300 hover:bg-[#005fa3] focus:outline-none focus:ring-2 focus:ring-[#005fa3] focus:ring-offset-2 max-[768px]:w-full"
+              onClick={addEmployee}
+              className="cursor-pointer rounded-[5px] border-0 bg-green-600 px-[18px] py-[10px] text-white transition duration-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-[#005fa3] focus:ring-offset-2 max-[768px]:w-full"
             >
               Add Employee
             </button>
@@ -167,7 +168,7 @@ export default function EmployeeForm({
             <button
               type="button"
               onClick={fetchEmp}
-              className="cursor-pointer rounded-[5px] border-0 bg-[#0078d4] px-[18px] py-[10px] text-white transition duration-300 hover:bg-[#005fa3] focus:outline-none focus:ring-2 focus:ring-[#005fa3] focus:ring-offset-2 max-[768px]:w-full"
+              className="cursor-pointer rounded-[5px] border-0 bg-gray-700 px-[18px] py-[10px] text-white transition duration-300 hover:bg-black focus:outline-none focus:ring-2 focus:ring-[#005fa3] focus:ring-offset-2 max-[768px]:w-full"
             >
               Fetch Employees
             </button>

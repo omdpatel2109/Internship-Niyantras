@@ -4,6 +4,7 @@ import EmployeeList from "./EmployeeList";
 // import useEmployees from '../hooks/Employee';
 import { useEmployeeContext } from "../context/EmployeeContext";
 // import type { Employee } from "../type";
+import EmployeeDashboard from "./EmployeeDashboard";
 
 // export type Employee = {
 //   firstName: string;
@@ -143,6 +144,11 @@ return (
           Welcome to the Employee Management System!
         </p>
       </header>
+
+      {/* Employee Dashboard */}
+      <section>
+                <EmployeeDashboard />
+      </section>
 
       {/* Employee Form */}
       <section

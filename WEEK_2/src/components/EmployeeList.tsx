@@ -29,7 +29,10 @@ export default function EmployeeList() {
     searchEmp,
     setSearchEmp,
     removeSearch,
-} = useEmployeeContext();
+    sortField,
+    setSortField,
+    sortEmployees,
+  } = useEmployeeContext();
 return (
   <div className="bg-white p-[25px] rounded-[8px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
 
@@ -67,6 +70,23 @@ return (
         <option value="Accounting">Accounting</option>
         <option value="Training">Training</option>
         <option value="Sales">Sales</option>
+      </select>
+
+      <select
+        className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full ml-[15px]"
+        value={sortField}
+        onChange={(e) => {
+          setSortField(e.target.value);
+          sortEmployees(e.target.value);
+        }
+      }
+      >
+        <option value="">Sort Employees..</option>
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="email">Email</option>
+        <option value="department">Department</option>
+        <option value="title">Title</option>
       </select>
 
     </div>

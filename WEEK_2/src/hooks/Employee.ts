@@ -14,6 +14,7 @@ export default function useEmployee(){
     const [filterDepartment, setFilterDepartment] = useState("");
     const [searchEmp, setSearchEmp] = useState("");
     const [allEmployee, setAllEmployee] = useState<Employee[]>([]); //for when clear the search automatic show all the list
+    const [sortField, setSortField] = useState<string>("");
 
     //add employee
     function addEmployee(employee: Employee){
@@ -95,11 +96,24 @@ export default function useEmployee(){
     }
         
     
-        //remove search
-        function removeSearch(){
-            setSearchEmp('');
-            setEmployees(allEmployee);
-        }
+    //remove search
+    function removeSearch(){
+        setSearchEmp('');
+        setEmployees(allEmployee);
+    }
+
+    //sort by fname, lname,dept,emil,title
+    function sortEmployees(field: string) {
+        const sortedEmployees = [...employees].sort((a, b) => {
+            const valueA = a[field as keyof Employee] as string;
+            const valueB = b[field as keyof Employee] as string;
+
+            return valueA.localeCompare(valueB);
+        });
+
+        setEmployees(sortedEmployees);  
+    }
+
 
 
     return {
@@ -113,7 +127,11 @@ export default function useEmployee(){
         searchEmp,
         setSearchEmp,
         searchEmployee,
-        removeSearch
+        removeSearch,
+        sortField,
+        setSortField,
+        sortEmployees,
     };
 }
+
 

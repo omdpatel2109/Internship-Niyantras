@@ -23,9 +23,13 @@ type EmployeeContextType = {
   searchEmployee: () => void;
   removeSearch: () => void;
 
+  sortField: string;
+  setSortField: React.Dispatch<React.SetStateAction<string>>;
+  sortEmployees: (field: string) => void;
+
 };
 
-const EmployeeContext = createContext<EmployeeContextType |null>(null);
+const EmployeeContext = createContext<EmployeeContextType | null>(null);
 
 type Props = {
   children: ReactNode; //render anything

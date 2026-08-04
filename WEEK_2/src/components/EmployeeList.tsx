@@ -1,15 +1,15 @@
 import EmployeeRow from "./EmployeeRow";
 import { useEmployeeContext } from "../context/EmployeeContext";
 
-type Employee = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: {
-    department: string;
-    title: string;
-  };
-};
+// type Employee = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   company: {
+//     department: string;
+//     title: string;
+//   };
+// };
 
 // type Props = {
 //   employees: Employee[];

@@ -4,7 +4,8 @@ import useEmployees from '../hooks/Employee';
 import type { Employee } from "../components/type";
 import type { ReactNode } from "react";
 
-
+// passing lots of props becomes prop drilling, so make a context and pass it through the children of the provider, 
+// so that all the children can access the data without prop drilling
 type EmployeeContextType = {
   employees: Employee[];
   filteredEmployees: Employee[];
@@ -26,15 +27,15 @@ export function EmployeeProvider({ children }: Props) {
   const employeeData = useEmployees();
 
   return (
-    <EmployeeContext.Provider value={employeeData}>
-      {children}
+    <EmployeeContext.Provider value={employeeData}> {/*employeeData available to all components inside the provider*/}
+      {children}                                    {/* renders whatever that you put in this through provider */}
     </EmployeeContext.Provider>
   );
 }
 
 export function useEmployeeContext() {
-  const employeeData = useEmployees();
-  const context = useContext(EmployeeContext);
+  // const employeeData = useEmployees();
+  const context = useContext(EmployeeContext); 
 
   if (!context) {
     throw new Error(

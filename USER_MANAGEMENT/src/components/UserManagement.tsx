@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
 import UserDetails from './UserDetails';
+import useUser from '../hooks/useUser';
 
 export default function UserManagement() {
+    const { users, searchingUser, searchUser, reset, applyFilters,
+        gender, setGender, role, setRole, bloodGroup, setBloodGroup, ageRange, setAgeRange,
+    } = useUser();
     return(
         <>
             <header>
@@ -11,15 +14,21 @@ export default function UserManagement() {
                     </h1>
                     <input 
                         type="text"
+                        value={searchingUser}
                         placeholder="Search users..."
                         className="text-left border border-gray-300 rounded mt-[5px] mr-[200px] py-2 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[40%]"
+                        onChange={(e) => searchUser(e.target.value)}
                     />
                 </div>
             </header>
 
-
             <section>
-                <UserDetails />
+                <UserDetails users={users} reset={reset} applyFilters={applyFilters}
+                    gender={gender} setGender={setGender}
+                    role={role} setRole={setRole}
+                    bloodGroup={bloodGroup} setBloodGroup={setBloodGroup}
+                    ageRange={ageRange} setAgeRange={setAgeRange}
+                />
             </section>
         </>
     )

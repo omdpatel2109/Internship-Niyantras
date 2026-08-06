@@ -1,7 +1,22 @@
 import UserFilter from './UserFilter';
 import UserList from './UserList';
+import type { User } from '../type/UserType';
 
-export default function UserDetails() {
+interface Props {
+    users: User[];
+    reset: () => void;
+    applyFilters: () => void;
+    gender: string;
+    setGender: (v: string) => void;
+    role: string;
+    setRole: (v: string) => void;
+    bloodGroup: string;
+    setBloodGroup: (v: string) => void;
+    ageRange: string;
+    setAgeRange: (v: string) => void;
+}
+
+export default function UserDetails({ users, reset, applyFilters, gender, setGender, role, setRole, bloodGroup, setBloodGroup, ageRange, setAgeRange }: Props) {
     return(
         <>
             <div className="flex flex-col min-h-screen bg-gray-100">
@@ -14,11 +29,16 @@ export default function UserDetails() {
                 </header>
 
                 <section>
-                    <UserFilter/>
+                    <UserFilter users={users} reset={reset} applyFilters={applyFilters}
+                        gender={gender} setGender={setGender}
+                        role={role} setRole={setRole}
+                        bloodGroup={bloodGroup} setBloodGroup={setBloodGroup}
+                        ageRange={ageRange} setAgeRange={setAgeRange}
+                    />
                 </section>
 
                 <section>
-                    <UserList />
+                    <UserList users={users} />
                 </section>
             
             </div>

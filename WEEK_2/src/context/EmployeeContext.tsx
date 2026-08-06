@@ -11,7 +11,7 @@ type EmployeeContextType = {
   filteredEmployees: Employee[];
 
   filterDepartment: string;
-  setFilterDepartment: React.Dispatch<React.SetStateAction<string>>;
+  setFilterDepartment: React.Dispatch<React.SetStateAction<string>>; // It takes a generic type parameter that specifies the type of the state value being updated. In this case, it is a string.
 
   searchEmp: string;
   setSearchEmp: React.Dispatch<React.SetStateAction<string>>;

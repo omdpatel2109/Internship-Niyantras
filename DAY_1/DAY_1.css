@@ -24,10 +24,6 @@
     transform: scale(1.05);
 }
 
-#addButton:active, #sortButton:active, #apiButton:active, #filterButton:active {
-    transform: scale(0.98);
-}
-
 .sortItemDiv, .apiDiv, .combinedDataDiv, .list-item, .filterDiv {
     background-color: powderblue;
     margin-top: 20px;

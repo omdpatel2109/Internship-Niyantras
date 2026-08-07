@@ -4,6 +4,8 @@ import useUser from '../hooks/useUser';
 export default function UserManagement() {
     const { users, searchingUser, searchUser, reset, applyFilters,
         gender, setGender, role, setRole, bloodGroup, setBloodGroup, ageRange, setAgeRange,
+        userPerPage, setUserPerPage, handleNext, handlePrev, currentPage, totalPages, firstUser, lastUser, 
+        userInOnePage
     } = useUser();
     return(
         <>
@@ -23,11 +25,15 @@ export default function UserManagement() {
             </header>
 
             <section>
-                <UserDetails users={users} reset={reset} applyFilters={applyFilters}
+                <UserDetails users={users} userInOnePage={userInOnePage} reset={reset} applyFilters={applyFilters}
                     gender={gender} setGender={setGender}
                     role={role} setRole={setRole}
                     bloodGroup={bloodGroup} setBloodGroup={setBloodGroup}
                     ageRange={ageRange} setAgeRange={setAgeRange}
+                    userPerPage={userPerPage} handlePrev={handlePrev} handleNext={handleNext}
+                    currentPage={currentPage} totalPages={totalPages} 
+                    firstUser={firstUser} lastUser={lastUser} 
+                    setUserPerPage={(value: string) => setUserPerPage(Number(value))}
                 />
             </section>
         </>

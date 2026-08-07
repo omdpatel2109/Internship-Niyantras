@@ -1,25 +1,29 @@
-import type {User} from '../type/UserType';
+import { Search } from 'lucide-react';
+import type {User} from '../type/userType';
 
 interface Props {
     users: User[],
     reset: () => void, 
     applyFilters: () => void,
     gender: string,
-    setGender: (v: string) => void,
+    setGender: (value: string) => void,
     role: string,
-    setRole: (v: string) => void,
+    setRole: (value: string) => void,
     bloodGroup: string,
-    setBloodGroup: (v: string) => void,
+    setBloodGroup: (value: string) => void,
     ageRange: string,
-    setAgeRange: (v: string) => void,
+    setAgeRange: (value: string) => void,
 }
 
-export default function UserFilter({users, reset, applyFilters, gender, setGender, role, setRole, bloodGroup, setBloodGroup, ageRange, setAgeRange}: Props) {
+export default function UserFilter({users, reset, applyFilters, gender, 
+    setGender, role, setRole, bloodGroup, 
+    setBloodGroup, ageRange, setAgeRange,
+    }: Props) {
     return(
         <>
             <header>
                 <div className="flex items-center justify-between border border-gray-300 p-4 bg-white rounded-2xl ml-[30px] mr-[30px] ">
-                    <label className="w-[20%]">Gender:
+                    <span className="w-[20%]">Gender:
                         <select value={gender} className="ml-2 border border-gray-300 rounded py-1 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[80%] h-10"
                         onChange={(e) => setGender(e.target.value)}
                         >
@@ -27,9 +31,9 @@ export default function UserFilter({users, reset, applyFilters, gender, setGende
                             <option value="male">Male</option>      
                             <option value="female">Female</option>  
                         </select>
-                    </label>
+                    </span>
 
-                    <label className="w-[20%]">Role:
+                    <span className="w-[20%]">Role:
                         <select value={role} className="ml-2 border border-gray-300 rounded py-1 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[85%] h-10"
                         onChange={(e) => setRole(e.target.value)}
                         >
@@ -38,9 +42,9 @@ export default function UserFilter({users, reset, applyFilters, gender, setGende
                             <option value="user">User</option> 
                             <option value="moderator">Moderator</option>  
                         </select>
-                    </label>
+                    </span>
 
-                    <label className="w-[20%]">Blood Group:
+                    <span className="w-[20%]">Blood Group:
                         <select value={bloodGroup} className="ml-2 border border-gray-300 rounded py-1 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[80%] h-10"
                         onChange={(e) => setBloodGroup(e.target.value)}
                         >
@@ -54,9 +58,9 @@ export default function UserFilter({users, reset, applyFilters, gender, setGende
                             <option value="O+">O+</option>      
                             <option value="O-">O-</option>  
                         </select>
-                    </label>
+                    </span>
 
-                    <label className="w-[20%]">Age Range:
+                    <span className="w-[20%]">Age Range:
                         <select value={ageRange} className="ml-2 border border-gray-300 rounded py-1 px-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[80%] h-10"
                         onChange={(e) => setAgeRange(e.target.value)}
                         >
@@ -66,9 +70,9 @@ export default function UserFilter({users, reset, applyFilters, gender, setGende
                             <option value="35-45">35-45</option>
                             <option value="45-55">45-55</option>
                         </select>
-                    </label>
+                    </span>
 
-                    <button className="ml-2 bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    <button className="ml-2 bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500"
                     onClick={reset}
                     >
                         Reset

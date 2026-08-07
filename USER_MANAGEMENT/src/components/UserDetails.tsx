@@ -1,22 +1,37 @@
 import UserFilter from './UserFilter';
 import UserList from './UserList';
-import type { User } from '../type/UserType';
+import type { User } from '../type/userType';
 
 interface Props {
-    users: User[];
-    reset: () => void;
-    applyFilters: () => void;
-    gender: string;
-    setGender: (v: string) => void;
-    role: string;
-    setRole: (v: string) => void;
-    bloodGroup: string;
-    setBloodGroup: (v: string) => void;
-    ageRange: string;
-    setAgeRange: (v: string) => void;
+    users: User[],
+    reset: () => void,
+    applyFilters: () => void,
+    gender: string,
+    setGender: (value: string) => void,
+    role: string,
+    setRole: (value: string) => void,
+    bloodGroup: string,
+    setBloodGroup: (value: string) => void,
+    ageRange: string,
+    setAgeRange: (value: string) => void,
+    userPerPage: number,
+    handlePrev: () => void,
+    handleNext: () => void,
+    currentPage: number,
+    totalPages: number,
+    firstUser: number,
+    lastUser: number,
+    userInOnePage: User[], //pagination user
+    setUserPerPage: (value: string) => void,
 }
 
-export default function UserDetails({ users, reset, applyFilters, gender, setGender, role, setRole, bloodGroup, setBloodGroup, ageRange, setAgeRange }: Props) {
+export default function UserDetails({ 
+    users, userInOnePage, reset, applyFilters, 
+    gender, setGender, role, setRole,
+    bloodGroup, setBloodGroup, ageRange, 
+    setAgeRange, userPerPage, setUserPerPage,
+    handleNext, handlePrev, currentPage, totalPages, firstUser, lastUser
+    }: Props) {
     return(
         <>
             <div className="flex flex-col min-h-screen bg-gray-100">
@@ -38,7 +53,11 @@ export default function UserDetails({ users, reset, applyFilters, gender, setGen
                 </section>
 
                 <section>
-                    <UserList users={users} />
+                    <UserList users={userInOnePage} totalUsers={users.length} userPerPage={userPerPage}
+                    handleNext={handleNext} handlePrev={handlePrev}
+                    currentPage={currentPage} totalPages={totalPages}
+                    firstUser={firstUser} lastUser={lastUser} setUserPerPage={setUserPerPage}
+                    />
                 </section>
             
             </div>

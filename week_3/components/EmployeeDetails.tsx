@@ -3,59 +3,43 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useEmployeeContext } from "@/context/EmployeeContext";
-
-type Employee = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: {
-    department: string;
-    title: string;
-  };
-};
+import type {Employee} from './type';
 
 type Props = {
   employee: Employee;
 };
 
 export default function EmployeeDetails({ employee }: Props) {
-  const employeeContext = useEmployeeContext() as any;
-  const { employees, setEmployees } = employeeContext;
 
-  const existingEmployee =
-    employees.find((emp: any) => emp.id === employee.id) || employee;
+  const {
+    employees = [],
+    updateEmployee,
+  } = useEmployeeContext();
+
+  const existingEmployee = employees.find((emp: any) => emp.id === employee.id) || employee;
 
   const [isEditing, setIsEditing] = useState(false);
 
   const [firstName, setFirstName] = useState(existingEmployee.firstName);
   const [lastName, setLastName] = useState(existingEmployee.lastName);
   const [email, setEmail] = useState(existingEmployee.email);
-  const [department, setDepartment] = useState(
-    existingEmployee.company.department
-  );
+  const [department, setDepartment] = useState(existingEmployee.company.department);
   const [title, setTitle] = useState(existingEmployee.company.title);
 
   function handleSave() {
-    const updatedEmployees = employees.map((emp: any) => {
-      if (emp.id === employee.id) {
-        return {
-          ...emp,
-          firstName,
-          lastName,
-          email,
-          company: {
-            ...emp.company,
+    const updatedEmployee = {
+        ...existingEmployee,
+        firstName,
+        lastName,
+        email,
+        company: {
+            ...existingEmployee.company,
             department,
             title,
-          },
-        };
-      }
+        },
+    };
 
-      return emp;
-    });
-
-    setEmployees(updatedEmployees);
+    updateEmployee(updatedEmployee);
 
     setIsEditing(false);
   }
@@ -73,7 +57,7 @@ export default function EmployeeDetails({ employee }: Props) {
   return (
     <div className="rounded-[8px] bg-white p-[25px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
       <div className="mb-[25px] flex items-center justify-between">
-        <h1 className="text-[26px] font-bold text-[#333]">
+        <h1 className="text-[26px] font-bold text-gray-800">
           Employee Details
         </h1>
 
@@ -90,29 +74,29 @@ export default function EmployeeDetails({ employee }: Props) {
           <div className="space-y-[18px]">
             <div>
               <p className="font-bold text-[#555]">First Name</p>
-              <p className="text-[#333]">{existingEmployee.firstName}</p>
+              <p className="text-gray-800">{existingEmployee.firstName}</p>
             </div>
 
             <div>
               <p className="font-bold text-[#555]">Last Name</p>
-              <p className="text-[#333]">{existingEmployee.lastName}</p>
+              <p className="text-gray-800">{existingEmployee.lastName}</p>
             </div>
 
             <div>
               <p className="font-bold text-[#555]">Email</p>
-              <p className="text-[#333]">{existingEmployee.email}</p>
+              <p className="text-gray-800">{existingEmployee.email}</p>
             </div>
 
             <div>
               <p className="font-bold text-[#555]">Department</p>
-              <p className="text-[#333]">
+              <p className="text-gray-800">
                 {existingEmployee.company.department}
               </p>
             </div>
 
             <div>
               <p className="font-bold text-[#555]">Title</p>
-              <p className="text-[#333]">
+              <p className="text-gray-800">
                 {existingEmployee.company.title}
               </p>
             </div>

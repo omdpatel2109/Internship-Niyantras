@@ -27,6 +27,7 @@ import { error } from "node:console";
         sortField: string;
         setSortField: React.Dispatch<React.SetStateAction<string>>;
         sortEmployees: (field: string) => void;
+        updateEmployee: (employee: Employee) => void;
 
         loading: boolean;
 

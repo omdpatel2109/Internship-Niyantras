@@ -33,9 +33,7 @@ async function addEmployee(formData: FormData): Promise<Employee | null> {
 export default function EmployeesPage() {
   return (
     <main className="p-10">
-      <EmployeeProvider>
         <EmployeeSystem addEmployee={addEmployee} />
-      </EmployeeProvider>
     </main>
   );
 }

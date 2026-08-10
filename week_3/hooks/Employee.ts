@@ -24,6 +24,17 @@ export default function useEmployee(){
         setEmployees((prev) => [...prev, employee]);
     }
 
+    // update employee
+    function updateEmployee(updatedEmployee: Employee) {
+        setEmployees((prev) =>
+            prev.map((employee) =>
+                employee.id === updatedEmployee.id
+                    ? updatedEmployee
+                    : employee
+            )
+        );
+    }
+
     //remove employee
     function removeEmployees(){
         if (window.confirm("Remove all employees?")) {
@@ -135,6 +146,7 @@ export default function useEmployee(){
         setSortField,
         sortEmployees,
         setLoading,loading,
+        updateEmployee,
     };
 }
 

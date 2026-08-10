@@ -149,6 +149,19 @@ export default function useUser(){
             console.log("Error fetching user:", error);
         }
     }
+
+    function editProfile(id: number, firstName: string,
+        lastName: string, phone: string){
+            setAllUsers((prevUsers) =>
+                prevUsers.map((user) => user.id === id ? {
+                    ...user,
+                    firstName,
+                    lastName,
+                    phone
+                } : user
+            )
+        );
+    }
     
     return {
         users,
@@ -171,5 +184,6 @@ export default function useUser(){
         firstUser, lastUser,
 
         fetchUserById,
+        editProfile,
     }
 }

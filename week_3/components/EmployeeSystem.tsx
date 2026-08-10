@@ -1,112 +1,49 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+
+import type { Employee } from "./type";
 import EmployeeForm from "./EmployeeForm";
 import EmployeeList from "./EmployeeList";
-import { useEmployeeContext } from "../context/EmployeeContext";
 import EmployeeDashboard from "./EmployeeDashboard";
-import Loading from "./Loading";
+import { useEmployeeContext } from "@/context/EmployeeContext";
 
+type Props = {
+  addEmployee: (formData: FormData) => Promise<Employee | null>;
+};
 
-export default function EmployeeSystem() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [department, setDepartment] = useState("");
-    const [title, setTitle] = useState("");
+export default function EmployeeSystem({ addEmployee }: Props) {
+  const { employees, loading } = useEmployeeContext();
 
-    const {
-        addEmployee,
-        fetchEmployees,
-        loading,
-    } = useEmployeeContext();
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    function handleAddEmployee() {
-        if (!firstName || !lastName || !email || !department || !title) {
-            alert("Fill all fields");
-            return;
-        }
-
-    addEmployee({
-        firstName,
-        lastName,
-        email,
-        company: {
-        department,
-        title,
-        },
-    });
-
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setDepartment("");
-    setTitle("");
-}
-
-    if (loading) {
-        return <Loading />;
-    }
-
-
-        return (
+  return (
     <div className="min-h-screen w-full bg-[#f4f6f9] px-[30px] py-[30px] font-sans">
-
-        {/* Main centered container */}
-        <div className="mx-auto w-full max-w-[900px]">
-
-        {/* Header */}
+      <div className="mx-auto w-full max-w-[900px]">
         <header className="mb-[30px] text-center">
-            <h1 className="mb-[10px] text-[28px] font-bold text-[#333]">
+          <h1 className="mb-[10px] text-[28px] font-bold text-[#333]">
             Employee Management System
-            </h1>
-
-            <p className="text-[16px] text-[#666]">
+          </h1>
+          <p className="text-[16px] text-[#666]">
             Welcome to the Employee Management System!
-            </p>
+          </p>
         </header>
 
-        {/* Employee Dashboard */}
-        <section>
-            <Suspense fallback={<Loading/>}>
-                <EmployeeDashboard />
-            </Suspense>
+        <section className="mb-[30px] rounded-[8px] bg-white p-[25px]">
+          <EmployeeDashboard employees={employees} />
         </section>
 
-        {/* Employee Form */}
         <section
-            aria-labelledby="add-employee-heading"
-            className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] "
+          aria-labelledby="add-employee-heading"
+          className="mb-[30px] w-full rounded-[8px] bg-white p-[25px]"
         >
-        <Suspense fallback={<Loading/>}>
-            <EmployeeForm
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            department={department}
-            title={title}
-
-            setFirstName={setFirstName}
-            setLastName={setLastName}
-            setEmail={setEmail}
-            setDepartment={setDepartment}
-            setTitle={setTitle}
-
-            addEmployee={handleAddEmployee}
-            fetchEmp={fetchEmployees}
-            />
-        </Suspense>
+          <EmployeeForm action={addEmployee} />
         </section>
 
-        {/* Employee List */}
-        <section className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] ">
-            <Suspense fallback={<Loading/>}>
-                <EmployeeList />
-            </Suspense>
+        <section className="mb-[30px] rounded-[8px] bg-white p-[25px]">
+          <EmployeeList employees={employees} />
         </section>
-
-        </div>
+      </div>
     </div>
-    );
-    }
-
-export {EmployeeSystem};
+  );
+}

@@ -27,6 +27,8 @@ import type { ReactNode } from "react";
     setSortField: React.Dispatch<React.SetStateAction<string>>;
     sortEmployees: (field: string) => void;
 
+    loading: boolean;
+
     };
 
     const EmployeeContext = createContext<EmployeeContextType | null>(null);

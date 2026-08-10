@@ -1,6 +1,8 @@
 import EmployeeRow from "./EmployeeRow";
 import { useEmployeeContext } from "@/context/EmployeeContext";
 import EmployeeSearch from "./EmployeeSearch";
+import { Suspense } from "react";
+import Loading from "./Loading";
 
 export default function EmployeeList() {
     const {
@@ -28,8 +30,9 @@ export default function EmployeeList() {
 
         <div className="mb-[20px]">
 
-        <EmployeeSearch />
-        
+        <Suspense fallback={<Loading/>}>
+            <EmployeeSearch />
+        </Suspense>
 
         <select
             className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full"
@@ -111,10 +114,10 @@ export default function EmployeeList() {
             <tbody>
 
             {filteredEmployees.map((employee, index) => (
-                <EmployeeRow
-                key={index}
-                employee={employee}
-                />
+                    <EmployeeRow
+                    key={index}
+                    employee={employee}
+                    />
             ))}
 
             </tbody>
@@ -138,4 +141,4 @@ export default function EmployeeList() {
 
     </div>
     );
-    }
+}

@@ -16,6 +16,7 @@ export default function useEmployee(){
     const [searchEmp, setSearchEmp] = useState("");
     const [allEmployee, setAllEmployee] = useState<Employee[]>([]); //for when clear the search automatic show all the list
     const [sortField, setSortField] = useState<string>("");
+    const [loading, setLoading] = useState(false);
 
     //add employee
     function addEmployee(employee: Employee){
@@ -31,6 +32,7 @@ export default function useEmployee(){
 
     //fetch employee
     async function fetchEmployees(){
+        setLoading(true);
         try{
             const response: Response = await fetch("https://dummyjson.com/users");
             if(!response.ok){
@@ -54,7 +56,9 @@ export default function useEmployee(){
         }catch(error){
             alert("Error fetching employees");
             console.error(error);
-        }
+        }finally {
+            setLoading(false);
+        }   
     }
 
     useEffect(() => {
@@ -132,6 +136,7 @@ export default function useEmployee(){
         sortField,
         setSortField,
         sortEmployees,
+        setLoading,loading,
     };
 }
 

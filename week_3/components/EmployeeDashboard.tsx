@@ -13,7 +13,7 @@ export default function EmployeeDashboard() {
     );
 
     return (
-        <section className="mb-[30px] rounded-[8px] bg-white p-[25px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
+        <section className="mb-[30px] rounded-[8px] bg-white p-[25px]">
 
             <h2 className="mb-[20px] text-[20px] font-bold text-[#333]">
                 Employee Dashboard

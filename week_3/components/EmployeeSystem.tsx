@@ -1,9 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import EmployeeForm from "./EmployeeForm";
 import EmployeeList from "./EmployeeList";
 import { useEmployeeContext } from "../context/EmployeeContext";
 import EmployeeDashboard from "./EmployeeDashboard";
+import Loading from "./Loading";
+
 
 export default function EmployeeSystem() {
     const [firstName, setFirstName] = useState("");
@@ -13,16 +15,16 @@ export default function EmployeeSystem() {
     const [title, setTitle] = useState("");
 
     const {
-    addEmployee,
-    fetchEmployees,
-    
+        addEmployee,
+        fetchEmployees,
+        loading,
     } = useEmployeeContext();
 
     function handleAddEmployee() {
-    if (!firstName || !lastName || !email || !department || !title) {
-        alert("Fill all fields");
-        return;
-    }
+        if (!firstName || !lastName || !email || !department || !title) {
+            alert("Fill all fields");
+            return;
+        }
 
     addEmployee({
         firstName,
@@ -39,7 +41,12 @@ export default function EmployeeSystem() {
     setEmail("");
     setDepartment("");
     setTitle("");
+}
+
+    if (loading) {
+        return <Loading />;
     }
+
 
         return (
     <div className="min-h-screen w-full bg-[#f4f6f9] px-[30px] py-[30px] font-sans">
@@ -60,14 +67,17 @@ export default function EmployeeSystem() {
 
         {/* Employee Dashboard */}
         <section>
-                    <EmployeeDashboard />
+            <Suspense fallback={<Loading/>}>
+                <EmployeeDashboard />
+            </Suspense>
         </section>
 
         {/* Employee Form */}
         <section
             aria-labelledby="add-employee-heading"
-            className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
+            className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] "
         >
+        <Suspense fallback={<Loading/>}>
             <EmployeeForm
             firstName={firstName}
             lastName={lastName}
@@ -84,11 +94,14 @@ export default function EmployeeSystem() {
             addEmployee={handleAddEmployee}
             fetchEmp={fetchEmployees}
             />
+        </Suspense>
         </section>
 
         {/* Employee List */}
-        <section className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
-            <EmployeeList />
+        <section className="mb-[30px] w-full rounded-[8px] bg-white p-[25px] ">
+            <Suspense fallback={<Loading/>}>
+                <EmployeeList />
+            </Suspense>
         </section>
 
         </div>

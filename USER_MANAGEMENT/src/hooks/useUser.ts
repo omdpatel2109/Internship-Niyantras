@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 import type { User } from '../type/userType';
 
 export default function useUser(){
@@ -14,10 +14,6 @@ export default function useUser(){
     const [currentPage, setCurrentPage] = useState(1);
     const [userPerPage, setUserPerPage] = useState(10);
 
-
-    useEffect(() => { fetchUser(); }, []);
-
-
     //fetching data from api function
     async function fetchUser() {
         try{
@@ -31,16 +27,31 @@ export default function useUser(){
             console.log(error);
         }
     }
+    useEffect(() => {
+        fetchUser();
+    }, []);
 
     //search user function
-    function searchUser(value: string){
+    async function searchUser(value: string) {
         setSearchingUser(value);
-        const search = value.toLowerCase();
-        const searchedUser = allUsers.filter((user) =>
-                `${user.firstName} ${user.lastName}`.toLowerCase().includes(search)
-            )
-        setCurrentPage(1);
-        setUsers(searchedUser);
+
+        if(value.trim() === "") {
+            setUsers(allUsers);
+            setCurrentPage(1);
+            return;
+        }
+
+        try {
+            const response: Response = await fetch(`https://dummyjson.com/users/search?q=${encodeURIComponent(value)}`);
+
+            const data = await response.json();
+
+            setUsers(data.users);
+            setCurrentPage(1);
+
+        }catch(error) {
+            console.log("Error searching users:", error);
+        }
     }
 
 
@@ -102,7 +113,6 @@ export default function useUser(){
         setUsers(allUsers);
     }
 
-    //function for showing 1-10, 10-20, 20-30 user
     const firstUserIndex = (currentPage - 1) * userPerPage;
     const lastUserIndex = firstUserIndex + userPerPage;
     const userInOnePage = users.slice(firstUserIndex, lastUserIndex);
@@ -120,12 +130,30 @@ export default function useUser(){
             setCurrentPage((prev) => prev-1);
         }
     }
+    function handleUserPerPage(value: number) {
+        setUserPerPage(value);
+        setCurrentPage(1);
+    }
+
+    //personal details
+    async function fetchUserById(id: number) {
+        try {
+            const response: Response = await fetch(`https://dummyjson.com/users/${id}`
+        );
+
+        const data: User = await response.json();
+
+        return data;
+        } catch (error) {
+            console.log("Error fetching user:", error);
+        }
+    }
     
     return {
         users,
         searchingUser,
         setSearchingUser,
-        searchUser,
+        searchUser,handleUserPerPage,
 
         gender,setGender,
         ageRange,setAgeRange,
@@ -136,6 +164,8 @@ export default function useUser(){
         reset,
 
         currentPage,setCurrentPage,userInOnePage,userPerPage, setUserPerPage,
-        handleNext,handlePrev, totalPages, firstUser, lastUser
+        handleNext,handlePrev, totalPages, firstUser, lastUser,
+
+        fetchUserById,
     }
 }

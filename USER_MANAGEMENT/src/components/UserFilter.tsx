@@ -1,24 +1,12 @@
-import { Search } from 'lucide-react';
-import type {User} from '../type/userType';
+import { useUserContext } from "../context/UserContext";
 
-interface Props {
-    users: User[],
-    reset: () => void, 
-    applyFilters: () => void,
-    gender: string,
-    setGender: (value: string) => void,
-    role: string,
-    setRole: (value: string) => void,
-    bloodGroup: string,
-    setBloodGroup: (value: string) => void,
-    ageRange: string,
-    setAgeRange: (value: string) => void,
-}
+export default function UserFilter() {
 
-export default function UserFilter({users, reset, applyFilters, gender, 
-    setGender, role, setRole, bloodGroup, 
-    setBloodGroup, ageRange, setAgeRange,
-    }: Props) {
+    const { reset, applyFilters, gender,
+        setGender, role, setRole,
+        bloodGroup, setBloodGroup, ageRange, setAgeRange
+    } = useUserContext();
+
     return(
         <>
             <header>

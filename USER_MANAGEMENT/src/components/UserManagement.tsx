@@ -1,12 +1,8 @@
 import UserDetails from './UserDetails';
-import useUser from '../hooks/useUser';
+import { useUserContext } from "../context/UserContext";
 
 export default function UserManagement() {
-    const { users, searchingUser, searchUser, reset, applyFilters,
-        gender, setGender, role, setRole, bloodGroup, setBloodGroup, ageRange, setAgeRange,
-        userPerPage, setUserPerPage, handleNext, handlePrev, currentPage, totalPages, firstUser, lastUser, 
-        userInOnePage
-    } = useUser();
+    const { searchingUser, searchUser } = useUserContext();
     return(
         <>
             <header>
@@ -25,16 +21,7 @@ export default function UserManagement() {
             </header>
 
             <section>
-                <UserDetails users={users} userInOnePage={userInOnePage} reset={reset} applyFilters={applyFilters}
-                    gender={gender} setGender={setGender}
-                    role={role} setRole={setRole}
-                    bloodGroup={bloodGroup} setBloodGroup={setBloodGroup}
-                    ageRange={ageRange} setAgeRange={setAgeRange}
-                    userPerPage={userPerPage} handlePrev={handlePrev} handleNext={handleNext}
-                    currentPage={currentPage} totalPages={totalPages} 
-                    firstUser={firstUser} lastUser={lastUser} 
-                    setUserPerPage={(value: string) => setUserPerPage(Number(value))}
-                />
+                <UserDetails/>
             </section>
         </>
     )

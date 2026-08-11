@@ -1,10 +1,11 @@
 "use client";
-
 import type { Employee } from "./type";
 import EmployeeForm from "./EmployeeForm";
 import EmployeeList from "./EmployeeList";
 import EmployeeDashboard from "./EmployeeDashboard";
 import { useEmployeeContext } from "@/context/EmployeeContext";
+import { Suspense } from "react";
+import Loading from "./Loading";
 
 type Props = {
   addEmployee: (formData: FormData) => Promise<Employee | null>;
@@ -41,7 +42,9 @@ export default function EmployeeSystem({ addEmployee }: Props) {
         </section>
 
         <section className="mb-[30px] rounded-[8px] bg-white p-[25px]">
-          <EmployeeList employees={employees} />
+          <Suspense fallback={<Loading />}>
+            <EmployeeList  />
+          </Suspense>
         </section>
       </div>
     </div>

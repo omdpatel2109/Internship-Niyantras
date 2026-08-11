@@ -1,11 +1,18 @@
 import type { Employee } from "./type";
 import EmployeeRow from "./EmployeeRow";
+import EmployeeSearch from "./EmployeeSearch";
+import { useEmployeeContext } from "@/context/EmployeeContext";
 
-type Props = {
-  employees: Employee[];
-};
 
-export default function EmployeeList({ employees }: Props) {
+export default function EmployeeList() {
+  const {
+    employees = [],
+    filterDepartment,
+    setFilterDepartment,
+    sortField,
+    setSortField,
+    sortEmployees,
+  } = useEmployeeContext();
   return (
     <div className="bg-white p-[25px] rounded-[8px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
       <h2
@@ -14,6 +21,52 @@ export default function EmployeeList({ employees }: Props) {
       >
         Employee List
       </h2>
+
+      <div className="mb-[20px]">
+
+        <EmployeeSearch />
+        
+
+        <select
+          className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full"
+          value={filterDepartment}
+          onChange={(e) => setFilterDepartment(e.target.value)}
+        >
+          <option value="">All Departments</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Support">Support</option>
+          <option value="Research and Development">
+            Research and Development
+          </option>
+          <option value="Human Resources">
+            Human Resources
+          </option>
+          <option value="Product Management">
+            Product Management
+          </option>
+          <option value="Marketing">Marketing</option>
+          <option value="Services">Services</option>
+          <option value="Accounting">Accounting</option>
+          <option value="Training">Training</option>
+          <option value="Sales">Sales</option>
+        </select>
+
+        <select
+          className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full ml-[15px]"
+          value={sortField}
+          onChange={(e) => {
+            setSortField(e.target.value);
+            sortEmployees(e.target.value);
+          }
+        }
+        >
+          <option value="">Sort Employees..</option>
+          <option value="firstName">First Name</option>
+          <option value="lastName">Last Name</option>
+          <option value="email">Email</option>
+        </select>
+
+      </div>
 
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">

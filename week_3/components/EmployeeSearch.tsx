@@ -1,3 +1,4 @@
+"use client";
 import { useEmployeeContext } from "@/context/EmployeeContext";
 
 export default function EmployeeSearch() {
@@ -15,7 +16,7 @@ export default function EmployeeSearch() {
                     value={searchEmp}
                     onChange={(e) => {
                         setSearchEmp(e.target.value);
-                        searchEmployee();
+                        searchEmployee(e.target.value);
                     }}
                     placeholder="Search employees..."
                     className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full mb-[15px]"
@@ -25,7 +26,7 @@ export default function EmployeeSearch() {
                     // type="submit"
                     id="searchEmpButton"
                     className="mb-[15px] cursor-pointer rounded-[5px] border-0 bg-green-600 px-[18px] py-[10px] text-white transition duration-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-[#005fa3] focus:ring-offset-2 max-[768px]:w-full"
-                    onClick={searchEmployee}
+                    onClick={() => searchEmployee(searchEmp)}
                     >
                     Search
                 </button>

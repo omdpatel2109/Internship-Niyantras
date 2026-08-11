@@ -76,28 +76,21 @@ export default function useEmployee(){
 
 
     //search employee by firstname, lastname, title, email ,department
-    function searchEmployee() {
-        const searchResult = allEmployee.filter((emp) => {
-            const search = searchEmp.toLocaleLowerCase();
+    async function searchEmployee(value: string) {
+        setSearchEmp(value);
 
-            return (
-                emp.firstName.toLowerCase().includes(search) ||
-                emp.lastName.toLowerCase().includes(search) ||
-                emp.email.toLowerCase().includes(search) ||
-                emp.company.department.toLowerCase().includes(search) ||
-                emp.company.title.toLowerCase().includes(search)
-            );
-        });
-
-        setEmployees(searchResult);
-
-        if(searchResult.length === 0){
-            // setEmployees([]);
-            alert("No employees found");
-        }
-        if(searchEmp === ''){
+        if(value.trim() === ""){
             setEmployees(allEmployee);
-        }   
+            return;
+        }
+
+        try{
+            const response: Response = await fetch(`https://dummyjson.com/users/search?q=${value}`);
+            const data: any = await response.json();
+            setEmployees(data.users);
+        }catch(error){
+            console.error(error);
+        }
     }
         
     

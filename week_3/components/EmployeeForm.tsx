@@ -1,6 +1,5 @@
-"use client";
-
-import { useState } from "react";
+"use client";  // needed because this form uses usestate and browser event handlers.
+import React, { useState } from "react";
 import { useEmployeeContext } from "@/context/EmployeeContext";
 
 type Props = {
@@ -15,8 +14,8 @@ export default function EmployeeForm({ action }: Props) {
   const [title, setTitle] = useState("");
   const { addEmployee } = useEmployeeContext();
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleSubmit(event: any) {
+    event.preventDefault(); //stops browser for a specific event
 
     const formData = new FormData(event.currentTarget);
     const employee = await action(formData);

@@ -42,7 +42,7 @@ export default function useUser(){
         }
 
         try {
-            const response: Response = await fetch(`https://dummyjson.com/users/search?q=${encodeURIComponent(value)}`);
+            const response: Response = await fetch(`https://dummyjson.com/users/search?q=${value}`);
 
             const data = await response.json();
 

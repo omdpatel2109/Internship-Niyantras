@@ -87,6 +87,9 @@ export default function EmployeeList() {
               <th className="border border-[#ddd] p-[12px] text-left bg-[#0078d4] text-white">
                 Title
               </th>
+              <th className="border border-[#ddd] p-[12px] text-left bg-[#0078d4] text-white">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>

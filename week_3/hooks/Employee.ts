@@ -2,13 +2,14 @@
 import { useState, useEffect } from 'react';
 
 export type Employee = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: {
-    department: string;
-    title: string;
-  };
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    company: {
+        department: string;
+        title: string;
+    };
 };
 export default function useEmployee(){
     const [employees, setEmployees] = useState<Employee[]>([]);
@@ -41,6 +42,7 @@ export default function useEmployee(){
             const data = await response.json();
 
             const apiEmployees: Employee[] = data.users.map((emp: any)=> ({
+                id: emp.id,
                 firstName: emp.firstName,
                 lastName: emp.lastName,
                 email: emp.email,
@@ -103,8 +105,11 @@ export default function useEmployee(){
     //sort by fname, lname,dept,emil,title
     function sortEmployees(field: string) {
         const sortedEmployees = [...employees].sort((a, b) => {
-            const valueA = a[field as keyof Employee] as string;
-            const valueB = b[field as keyof Employee] as string;
+            let valueA: string = "";
+            let valueB: string = "";
+
+            valueA = a[field as keyof Employee] as string || "";
+            valueB = b[field as keyof Employee] as string || "";
 
             return valueA.localeCompare(valueB);
         });

@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 import useEmployees from '@/hooks/Employee';
 import type { Employee } from "@/components/type";
 import type { ReactNode } from "react";
+import { error } from "node:console";
 
     // passing lots of props becomes prop drilling, so make a context and pass it through the children of the provider, 
     // so that all the children can access the data without prop drilling
@@ -34,27 +35,24 @@ import type { ReactNode } from "react";
     const EmployeeContext = createContext<EmployeeContextType | null>(null);
 
     type Props = {
-    children: ReactNode; //render anything
+        children: ReactNode; //render anything
     };
 
     export function EmployeeProvider({ children }: Props) {
-    const employeeData = useEmployees();
+        const employeeData = useEmployees();
 
-    return (
-        <EmployeeContext.Provider value={employeeData}> {/*employeeData available to all components inside the provider*/}
-        {children}                                    {/* renders whatever that you put in this through provider */}
-        </EmployeeContext.Provider>
-    );
+        return (
+            <EmployeeContext.Provider value={employeeData}> {/*employeeData available to all components inside the provider*/}
+            {children}                                    {/* renders whatever that you put in this through provider */}
+            </EmployeeContext.Provider>
+        );
     }
 
     export function useEmployeeContext() {
-    // const employeeData = useEmployees();
     const context = useContext(EmployeeContext); 
 
     if (!context) {
-        throw Error(
-        "useEmployeeContext must be used inside EmployeeProvider"
-        );
+        throw new Error("Context must be used inside EmployeeProvider");
     }
 
     return context;

@@ -71,32 +71,32 @@ export default function useUser(){
             filtered = filtered.filter((user) => user.bloodGroup === bloodGroup);
         }
 
-        if (ageRange !== "") {
-            switch (ageRange) {
-            case "18-26":
-                filtered = filtered.filter(
-                (user) => user.age >= 18 && user.age <= 26
-                );
-                break;
+        if(ageRange !== "") {
+            switch(ageRange) {
+                case "18-26":
+                    filtered = filtered.filter(
+                    (user) => user.age >= 18 && user.age <= 26
+                    );
+                    break;
 
-            case "26-35":
-                filtered = filtered.filter(
-                (user) => user.age >= 26 && user.age <= 35
-                );
-                break;
+                case "26-35":
+                    filtered = filtered.filter(
+                    (user) => user.age >= 26 && user.age <= 35
+                    );
+                    break;
 
-            case "35-45":
-                filtered = filtered.filter(
-                (user) => user.age >= 35 && user.age <= 45
-                );
-                break;
+                case "35-45":
+                    filtered = filtered.filter(
+                    (user) => user.age >= 35 && user.age <= 45
+                    );
+                    break;
 
-            case "45-55":
-                filtered = filtered.filter(
-                (user) => user.age >= 45 && user.age <= 55
-                );
-                break;
-            }
+                case "45-55":
+                    filtered = filtered.filter(
+                    (user) => user.age >= 45 && user.age <= 55
+                    );
+                    break;
+                }
         }
 
         setCurrentPage(1);
@@ -112,7 +112,8 @@ export default function useUser(){
         setCurrentPage(1);
         setUsers(allUsers);
     }
-
+    
+    //pagination
     const firstUserIndex = (currentPage - 1) * userPerPage;
     const lastUserIndex = firstUserIndex + userPerPage;
     const userInOnePage = users.slice(firstUserIndex, lastUserIndex);
@@ -163,8 +164,11 @@ export default function useUser(){
         applyFilters,
         reset,
 
-        currentPage,setCurrentPage,userInOnePage,userPerPage, setUserPerPage,
-        handleNext,handlePrev, totalPages, firstUser, lastUser,
+        currentPage,setCurrentPage,
+        userInOnePage,userPerPage, 
+        setUserPerPage, handleNext,
+        handlePrev, totalPages, 
+        firstUser, lastUser,
 
         fetchUserById,
     }

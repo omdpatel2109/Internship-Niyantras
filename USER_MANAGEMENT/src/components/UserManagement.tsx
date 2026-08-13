@@ -6,8 +6,8 @@ export default function UserManagement() {
     return(
         <>
             <header>
-                <div className="flex items-center justify-between p-4 bg-white">
-                    <h1 className="text-3xl font-bold mt-[5px] ml-[10px]">
+                <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-800">
+                    <h1 className="text-3xl font-bold mt-[5px] ml-[10px] dark:text-gray-400">
                         User Management
                     </h1>
                     <input 

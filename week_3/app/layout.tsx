@@ -5,7 +5,7 @@ export default function RootLayout({
   children,
 }: any) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className="min-h-screen bg-white dark:bg-black font-sans">
 
         <header className="border-b bg-white dark:bg-gradient-to-r dark:from-black dark:to-gray-800 px-6 py-4 shadow-sm">

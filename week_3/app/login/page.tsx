@@ -31,6 +31,9 @@ export default function LoginPage() {
           password,
         }),
       });
+      if (response.ok) {
+          window.location.href = "/";
+      }
 
       const data = await response.json();
 
@@ -39,12 +42,10 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/dashboard");
-      router.refresh();
+      router.push("/"); //redirect without full reload
+      router.refresh(); //refresh the current route and get fresh data form server side
     } catch {
       setError("Unable to login");
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -73,7 +74,7 @@ export default function LoginPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="admin@example.com"
+            placeholder="admin123@gmail.com"
             className="w-full rounded border p-3 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             required
           />
@@ -88,7 +89,7 @@ export default function LoginPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="password123"
+            placeholder="123456"
             className="w-full rounded border p-3 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             required
           />

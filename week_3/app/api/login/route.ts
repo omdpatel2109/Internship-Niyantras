@@ -5,11 +5,10 @@ import bcrypt from "bcryptjs";
 
 const demoUser = {
   id: "1",
-  email: "admin@example.com",
-
-  // Password = password123
+  email: "admin123@gmail.com",
+  // Password = 123456
   passwordHash:
-    "$2b$10$X7VJ7Qf4bYxJYv5x9KjQOeZq6KjK6J9sKJvFf1sXK5kJ8J8J8J8J8",
+    "$2b$10$YpMrG1w6eExRqe936iUWGOjc.0eyAGotue/3JhezzLBoBNrUTafQy",
 };
 
 export async function POST(req: NextRequest) {
@@ -42,10 +41,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const passwordMatch = await bcrypt.compare(
-      password,
-      demoUser.passwordHash
-    );
+    const passwordMatch = await bcrypt.compare(password,demoUser.passwordHash);
 
     if (!passwordMatch) {
       return NextResponse.json(
@@ -69,7 +65,6 @@ export async function POST(req: NextRequest) {
 
     response.cookies.set("session", session, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7,
       path: "/",

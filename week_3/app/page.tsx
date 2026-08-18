@@ -1,9 +1,17 @@
 import ThemeToggle from "@/components/ThemeToggle";
+import Image from 'next/image';
 
 export default function Home() {
     return (
-        <main className="min-h-screen p-10 bg-gradient-to-r from-blue-200 to-pink-300 dark:bg-gradient-to-r dark:from-black dark:to-gray-800">
-
+        <main className="min-h-screen p-10 bg-gradient-to-r from-blue-200 to-pink-300 dark:bg-gradient-to-r dark:from-black dark:to-gray-800 ">
+            <div className="relative h-[400px] w-full overflow-hidden rounded-2xl">
+                <Image
+                    src="/bg"
+                    alt="photo"
+                    fill
+                    priority    
+                />
+            </div>
             <div className="flex justify-center mt-[30px] p-[100px] bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 rounded-2xl dark:bg-gradient-to-r dark:from-gray-700 dark:via-gray-500 dark:to-gray-300">
 
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">

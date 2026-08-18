@@ -1,8 +1,9 @@
 import "server-only";
 
 import { SignJWT, jwtVerify } from "jose";
+import crypto from "crypto";
 
-const secretKey = process.env.SESSION_SECRET;
+let secretKey = process.env.SESSION_SECRET;
 
 if (!secretKey) {
   throw new Error("SESSION_SECRET is missing");

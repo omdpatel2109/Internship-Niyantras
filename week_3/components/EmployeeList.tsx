@@ -2,6 +2,7 @@ import type { Employee } from "./type";
 import EmployeeRow from "./EmployeeRow";
 import EmployeeSearch from "./EmployeeSearch";
 import { useEmployeeContext } from "@/context/EmployeeContext";
+import LogoutButton from "@/app/dashboard/LogoutButton";
 
 
 export default function EmployeeList() {
@@ -14,10 +15,10 @@ export default function EmployeeList() {
     sortEmployees,
   } = useEmployeeContext();
   return (
-    <div className="bg-white p-[25px] rounded-[8px] shadow-[0_2px_10px_rgba(0,0,0,0.1)]">
+    <div className="bg-white p-[25px] rounded-[8px] ">
       <h2
         id="employee-list-heading"
-        className="mb-[20px] text-[20px] font-bold text-[#333]"
+        className="mb-[20px] text-[20px] font-bold text-gray-800"
       >
         Employee List
       </h2>
@@ -28,7 +29,7 @@ export default function EmployeeList() {
         
 
         <select
-          className="w-[250px] p-[10px] border border-[#ccc] rounded-[5px] max-[768px]:w-full"
+          className="w-[250px] p-[10px] border border-gray-400 rounded-[5px] max-[768px]:w-full"
           value={filterDepartment}
           onChange={(e) => setFilterDepartment(e.target.value)}
         >
@@ -98,6 +99,10 @@ export default function EmployeeList() {
             ))}
           </tbody>
         </table>
+
+        <div className="mt-[15px]">
+            <LogoutButton />
+        </div>
       </div>
     </div>
   );

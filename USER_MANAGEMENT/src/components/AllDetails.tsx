@@ -104,7 +104,7 @@ export default function AllDetails() {
                                     className="w-24 h-24 rounded-lg object-cover border border-gray-300"
                                 />
                                 {/* User Basic Information */}
-                                <div className="">
+                                <div className="w-full">
 
                                     <div className="flex items-center gap-3">
 
@@ -122,14 +122,16 @@ export default function AllDetails() {
                                         @{user.username} · {user.email}
                                     </p>
 
-                                    {!isEditing && (
-                                        <button
-                                        onClick={handleEdit}
-                                        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded"
-                                        >
-                                            Edit Profile
-                                        </button>
-                                    )}
+                                    <div className="flex justify-end">
+                                        {!isEditing && (
+                                            <button
+                                            onClick={handleEdit}
+                                            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded "
+                                            >
+                                                Edit Profile
+                                            </button>
+                                        )}
+                                    </div>
 
                                 </div>
                             </div>

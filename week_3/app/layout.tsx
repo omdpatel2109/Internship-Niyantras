@@ -27,6 +27,10 @@ export default function RootLayout({
               <Link href="/employees" className="text-blue-600 dark:text-white hover:underline">
                 Employees
               </Link>
+
+              <Link href="/dashboard" className="text-blue-600 dark:text-white hover:underline">
+                Dashboard
+              </Link>
             </div>
           </nav>
         </header>

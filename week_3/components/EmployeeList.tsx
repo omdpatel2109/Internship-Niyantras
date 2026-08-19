@@ -98,11 +98,7 @@ export default function EmployeeList() {
               <EmployeeRow key={index} employee={employee} />
             ))}
           </tbody>
-        </table>
-
-        <div className="mt-[15px]">
-            <LogoutButton />
-        </div>
+        </table>  
       </div>
     </div>
   );

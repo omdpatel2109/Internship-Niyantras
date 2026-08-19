@@ -128,6 +128,12 @@ export default function useEmployee(){
         setEmployees(sortedEmployees);  
     }
 
+    //delete
+    function deleteEmployee(id: number) {
+        setEmployees((currentEmployees) =>
+            currentEmployees.filter((employee) => employee.id !== id)
+        );
+    }   
 
 
     return {
@@ -147,7 +153,6 @@ export default function useEmployee(){
         sortEmployees,
         setLoading,loading,
         updateEmployee,
+        deleteEmployee,
     };
 }
-
-

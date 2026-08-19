@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState } from "react";
 import useEmployees from '@/hooks/Employee';
 import type { Employee } from "@/components/type";
 import type { ReactNode } from "react";
-import { error } from "node:console";
 
     // passing lots of props becomes prop drilling, so make a context and pass it through the children of the provider, 
     // so that all the children can access the data without prop drilling
@@ -28,6 +27,7 @@ import { error } from "node:console";
         setSortField: React.Dispatch<React.SetStateAction<string>>;
         sortEmployees: (field: string) => void;
         updateEmployee: (employee: Employee) => void;
+        deleteEmployee: (id: number) => void;
 
         loading: boolean;
 

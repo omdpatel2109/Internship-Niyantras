@@ -2,8 +2,6 @@ import type { Employee } from "./type";
 import EmployeeRow from "./EmployeeRow";
 import EmployeeSearch from "./EmployeeSearch";
 import { useEmployeeContext } from "@/context/EmployeeContext";
-import LogoutButton from "@/app/dashboard/LogoutButton";
-
 
 export default function EmployeeList() {
   const {
@@ -15,7 +13,7 @@ export default function EmployeeList() {
     sortEmployees,
   } = useEmployeeContext();
   return (
-    <div className="bg-white p-[25px] rounded-[8px] ">
+    <div className="bg-white p-[25px] rounded-[8px] w-full    ">
       <h2
         id="employee-list-heading"
         className="mb-[20px] text-[20px] font-bold text-gray-800"
@@ -90,6 +88,9 @@ export default function EmployeeList() {
               </th>
               <th className="border border-[#ddd] p-[12px] text-left bg-[#0078d4] text-white">
                 Action
+              </th>
+              <th className="border border-[#ddd] p-[12px] text-left bg-[#0078d4] text-white">
+                Delete
               </th>
             </tr>
           </thead>

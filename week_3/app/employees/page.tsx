@@ -18,7 +18,7 @@ async function addEmployee(formData: FormData): Promise<Employee | null> {
     }
 
     const employee: Employee = {
-      id,
+      id: 0, 
       firstName,
       lastName,
       email,

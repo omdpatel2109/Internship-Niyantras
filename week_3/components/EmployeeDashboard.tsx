@@ -11,7 +11,7 @@ export default function EmployeeDashboard({ employees }: Props) {
 
   return (
     <section className="mb-[30px] rounded-[8px] bg-white p-[25px] dark:bg-gray-800">
-      <h2 className="mb-[20px] text-[20px] font-bold text-[#333] dark:text-white">
+      <h2 className="mb-[20px] text-[20px] font-bold text-gray-900 dark:text-white">
         Employee Dashboard
       </h2>
 

@@ -22,7 +22,7 @@ export default function EmployeeSystem({ addEmployee }: Props) {
     <div className="min-h-screen w-full bg-[#f4f6f9] px-[30px] py-[30px] font-sans">
       <div className="mx-auto w-full max-w-[1100px]">
         <header className="mb-[30px] text-center">
-          <h1 className="mb-[10px] text-[28px] font-bold text-[#333]">
+          <h1 className="mb-[10px] text-[28px] font-bold text-gray-900">
             Employee Management System
           </h1>
           <p className="text-[16px] text-[#666]">

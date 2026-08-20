@@ -5,7 +5,7 @@ import { useEmployeeContext } from "@/context/EmployeeContext";
 
 export default function EmployeeList() {
   const {
-    employees = [],
+    filteredEmployees = [],
     filterDepartment,
     setFilterDepartment,
     sortField,
@@ -13,7 +13,7 @@ export default function EmployeeList() {
     sortEmployees,
   } = useEmployeeContext();
   return (
-    <div className="bg-white p-[25px] rounded-[8px] w-full    ">
+    <div className="bg-white p-[25px] rounded-[8px] w-full">
       <h2
         id="employee-list-heading"
         className="mb-[20px] text-[20px] font-bold text-gray-800"
@@ -24,7 +24,6 @@ export default function EmployeeList() {
       <div className="mb-[20px]">
 
         <EmployeeSearch />
-        
 
         <select
           className="w-[250px] p-[10px] border border-gray-400 rounded-[5px] max-[768px]:w-full"
@@ -48,6 +47,7 @@ export default function EmployeeList() {
           <option value="Accounting">Accounting</option>
           <option value="Training">Training</option>
           <option value="Sales">Sales</option>
+          <option value="Legal">Legal</option>
         </select>
 
         <select
@@ -95,7 +95,7 @@ export default function EmployeeList() {
             </tr>
           </thead>
           <tbody>
-            {employees.map((employee, index) => (
+            {filteredEmployees.map((employee, index) => (
               <EmployeeRow key={index} employee={employee} />
             ))}
           </tbody>

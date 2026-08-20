@@ -31,9 +31,13 @@ export default async function RootLayout({children}: any) {
                 Employees
               </Link>
 
-              <Link href="/dashboard" className="text-blue-600 dark:text-white hover:underline">
-                Dashboard
-              </Link>
+              {session?.email ?
+              (<Link href="/dashboard" className="text-blue-600 dark:text-white hover:underline">
+                  Dashborad
+                </Link>) : (
+                  " "
+                ) 
+              }
 
               {session?.email ? ( " " ) : (
                 <Link href="/login" className="text-blue-600 dark:text-white hover:underline">

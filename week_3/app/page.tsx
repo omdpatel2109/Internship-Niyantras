@@ -6,7 +6,7 @@ export default function Home() {
         <main className="min-h-screen p-10 bg-gradient-to-r from-blue-200 to-pink-300 dark:bg-gradient-to-r dark:from-black dark:to-gray-800 ">
             <div className="relative h-[400px] w-full overflow-hidden rounded-2xl">
                 <Image
-                    src="/bg"
+                    src="/images.jpeg"
                     alt="photo"
                     fill
                     priority    

@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const result = loginSchema.safeParse(body);
 
-    if (!result.success) {
+    if(!result.success) {
       return NextResponse.json(
         {
           message: "Invalid email or password",
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
 
     const passwordMatch = await bcrypt.compare(password,demoUser.passwordHash);
 
-    if (!passwordMatch) {
+    if(!passwordMatch) {
       return NextResponse.json(
         {
           message: "Invalid email or password",
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     });
 
     return response;
-  } catch {
+  }catch{
     return NextResponse.json(
       {
         message: "Something went wrong",

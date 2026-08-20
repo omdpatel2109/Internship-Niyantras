@@ -48,6 +48,8 @@ export default function EmployeeList() {
           <option value="Training">Training</option>
           <option value="Sales">Sales</option>
           <option value="Legal">Legal</option>
+          {/* <option value="Legal">Legal</option> */}
+          
         </select>
 
         <select

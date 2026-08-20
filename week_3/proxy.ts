@@ -12,11 +12,11 @@ export async function proxy(request: NextRequest) {
     const isPublicRoute = publicRoutes.includes(path);
     const session = await decrypt(request.cookies.get("session")?.value);
 
-    if (isProtectedRoute && !session?.userId) {
+    if (isProtectedRoute && !session?.email) {
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    if (isPublicRoute && session?.userId) {
+    if (isPublicRoute && session?.email) {
         return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 

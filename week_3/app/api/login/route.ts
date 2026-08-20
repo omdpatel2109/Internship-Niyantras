@@ -4,7 +4,6 @@ import { loginSchema } from "@/app/lib/validation";
 import bcrypt from "bcryptjs";
 
 const demoUser = {
-  id: "1",
   email: "admin123@gmail.com",
   // Password = 123456
   passwordHash:
@@ -55,7 +54,6 @@ export async function POST(req: NextRequest) {
     }
 
     const session = await encrypt({
-      userId: demoUser.id,
       email: demoUser.email,
     });
 

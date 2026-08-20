@@ -17,10 +17,7 @@ export async function login(formData: FormData) {
     };
   }
 
-  const session = await encrypt({
-    userId: "1",
-    email,
-  });
+  const session = await encrypt({email});
 
   const cookieStore = await cookies();
 

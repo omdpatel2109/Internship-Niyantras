@@ -26,18 +26,15 @@ export default function LoginPage() {
           "Content-Type": "application/json",
         },
 
-        body: JSON.stringify({
-          email,
-          password,
-        }),
+        body: JSON.stringify({email, password}),
       });
-      if (response.ok) {
+      if(response.ok) {
           window.location.href = "/";
       }
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if(!response.ok) {
         setError(data.message);
         return;
       }

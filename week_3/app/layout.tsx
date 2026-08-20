@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { decrypt } from "@/app/lib/session";
 import "./globals.css";
 import localFont from "next/font/local";
 
@@ -6,9 +8,10 @@ const myFont = localFont({
   src: './fonts/myFont.ttf'
 })
 
-export default function RootLayout({
-  children,
-}: any) {
+export default async function RootLayout({children}: any) {
+  const cookieStore = await cookies();
+  const session = await decrypt(cookieStore.get("session")?.value);
+
   return (
     <html lang="en" className={myFont.className}>
       <body className="min-h-screen bg-white dark:bg-black font-sans">
@@ -31,6 +34,12 @@ export default function RootLayout({
               <Link href="/dashboard" className="text-blue-600 dark:text-white hover:underline">
                 Dashboard
               </Link>
+
+              {session?.email ? ( " " ) : (
+                <Link href="/login" className="text-blue-600 dark:text-white hover:underline">
+                  Login
+                </Link>
+              )}
             </div>
           </nav>
         </header>

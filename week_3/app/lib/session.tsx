@@ -1,7 +1,6 @@
 import "server-only";
 
 import { SignJWT, jwtVerify } from "jose";
-import crypto from "crypto";
 
 let secretKey = process.env.SESSION_SECRET;
 
@@ -12,7 +11,6 @@ if (!secretKey) {
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export type SessionPayload = {
-  userId: string;
   email: string;
 };
 
@@ -35,7 +33,6 @@ export async function decrypt(
     const { payload } = await jwtVerify(session, encodedKey);
 
     return {
-      userId: String(payload.userId),
       email: String(payload.email),
     };
   } catch {

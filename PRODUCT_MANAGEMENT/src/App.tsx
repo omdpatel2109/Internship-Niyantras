@@ -5,19 +5,36 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />}/>
+    const token = localStorage.getItem("token");
 
-        <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }/>
+    return (
+        <BrowserRouter>
+            <Routes>
+                {/* Login */}
+                <Route path="/login" element={ token ? (
+                  <Navigate to="/dashboard" replace />
+                    ) : (
+                      <Login />
+                    )}
+                />
 
-      </Routes>
-    </BrowserRouter>
-  );
+                  {/* Protected Dashboard */}
+                  <Route path="/dashboard" element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                />
+
+                  {/* Unknown routes */}
+                  <Route path="*" element={
+                      <Navigate
+                        to={token ? "/dashboard" : "/login"}
+                        replace
+                      />
+                    }
+                />
+            </Routes>
+        </BrowserRouter>
+    );
 }
-

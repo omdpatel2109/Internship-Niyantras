@@ -25,6 +25,15 @@ export default function App() {
                     </ProtectedRoute>
                   }
                 />
+
+                <Route path="*" element={
+                    token ? (
+                      <Navigate to={token ? "/dashboard" : "/login"} replace/>
+                    ) : (
+                      <Login />
+                    )
+                  }
+                />
               </Routes>
         </BrowserRouter>
     );

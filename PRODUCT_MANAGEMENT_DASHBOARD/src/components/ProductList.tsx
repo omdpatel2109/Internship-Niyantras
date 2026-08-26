@@ -95,7 +95,7 @@ export default function ProductList({
                             <td className="px-5 py-4">
                                 <div className="flex justify-center gap-2">
                                     <button
-                                    // onClick={() => onEdit(product)}
+                                    onClick={() => onEdit(product)}
                                     className="rounded-lg bg-blue-100 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-200"
                                     >
                                     Edit

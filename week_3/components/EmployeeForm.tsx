@@ -51,7 +51,6 @@ export default function EmployeeForm({ action }: Props) {
             id="firstName"
             type="text"
             name="firstName"
-            autoComplete="given-name"
             required
             className="h-[40px] w-full flex-1 rounded-[5px] border border-[#ccc] px-[10px] outline-none transition focus:border-[#0078d4] focus:ring-2 focus:ring-[#0078d4]/20"
             placeholder="First Name"
@@ -71,7 +70,6 @@ export default function EmployeeForm({ action }: Props) {
             id="lastName"
             type="text"
             name="lastName"
-            autoComplete="family-name"
             required
             className="h-[40px] w-full flex-1 rounded-[5px] border border-[#ccc] px-[10px] outline-none transition focus:border-[#0078d4] focus:ring-2 focus:ring-[#0078d4]/20"
             placeholder="Last Name"
@@ -91,7 +89,6 @@ export default function EmployeeForm({ action }: Props) {
             id="email"
             type="email"
             name="email"
-            autoComplete="email"
             required
             className="h-[40px] w-full flex-1 rounded-[5px] border border-[#ccc] px-[10px] outline-none transition focus:border-[#0078d4] focus:ring-2 focus:ring-[#0078d4]/20"
             placeholder="Email"

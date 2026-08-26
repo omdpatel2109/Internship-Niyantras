@@ -10,31 +10,22 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Login */}
-                <Route path="/login" element={ token ? (
-                  <Navigate to="/dashboard" replace />
+                <Route path="/login" element={
+                    token ? (
+                      <Navigate to="/dashboard" replace />
                     ) : (
                       <Login />
-                    )}
+                    )
+                  }
                 />
 
-                  {/* Protected Dashboard */}
-                  <Route path="/dashboard" element={
-                      <ProtectedRoute>
-                        <Dashboard />
-                      </ProtectedRoute>
-                    }
+                <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
                 />
-
-                  {/* Unknown routes */}
-                  <Route path="*" element={
-                      <Navigate
-                        to={token ? "/dashboard" : "/login"}
-                        replace
-                      />
-                    }
-                />
-            </Routes>
+              </Routes>
         </BrowserRouter>
     );
 }

@@ -125,10 +125,10 @@ export default function ProductForm({
                     onSubmit={handleSubmit}
                     className="space-y-4"
                 >
-                    {/* Product Name */}
+                    {/* Product Name  */}
                     <div>
                         <label className="mb-1 block font-medium text-gray-700 dark:text-white">
-                            Product Name *
+                            Product Name 
                         </label>
 
                         <input
@@ -153,7 +153,7 @@ export default function ProductForm({
                     {/* Category */}
                     <div>
                         <label className="mb-1 block font-medium text-gray-700 dark:text-white">
-                            Category *
+                            Category 
                         </label>
 
                         <input
@@ -179,7 +179,7 @@ export default function ProductForm({
                     {/* Price */}
                     <div>
                         <label className="mb-1 block font-medium text-gray-700 dark:text-white">
-                            Price *
+                            Price 
                         </label>
 
                         <input
@@ -207,7 +207,7 @@ export default function ProductForm({
                     {/* Stock */}
                     <div>
                         <label className="mb-1 block font-medium text-gray-700 dark:text-white">
-                            Stock *
+                            Stock 
                         </label>
 
                         <input

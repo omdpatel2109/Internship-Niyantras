@@ -5,13 +5,13 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
-    const token = localStorage.getItem("token");
+    const access_token = localStorage.getItem("access_token");
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={
-                    token ? (
+                    access_token ? (
                       <Navigate to="/dashboard" replace />
                     ) : (
                       <Login />
@@ -26,14 +26,6 @@ export default function App() {
                   }
                 />
 
-                <Route path="*" element={
-                    token ? (
-                      <Navigate to={token ? "/dashboard" : "/login"} replace/>
-                    ) : (
-                      <Login />
-                    )
-                  }
-                />
               </Routes>
         </BrowserRouter>
     );

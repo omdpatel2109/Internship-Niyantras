@@ -21,9 +21,6 @@ export async function POST(req: NextRequest) {
         {
           message: "Invalid email or password",
         },
-        {
-          status: 400,
-        }
       );
     }
 
@@ -34,9 +31,6 @@ export async function POST(req: NextRequest) {
         {
           message: "Invalid email or password",
         },
-        {
-          status: 401,
-        }
       );
     }
 
@@ -47,9 +41,6 @@ export async function POST(req: NextRequest) {
         {
           message: "Invalid email or password",
         },
-        {
-          status: 401,
-        }
       );
     }
 
@@ -66,16 +57,13 @@ export async function POST(req: NextRequest) {
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7,
       path: "/",
-    });
+    }); 
 
     return response;
   }catch{
     return NextResponse.json(
       {
         message: "Something went wrong",
-      },
-      {
-        status: 500,
       }
     );
   }

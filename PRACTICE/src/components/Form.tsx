@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import FormTable from './FormTable';
 import { Link } from 'react-router-dom';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export type FormValues = {
     // index: number;
@@ -36,20 +37,36 @@ const validate = (values: FormValues) => {
 
 export default function Form() {
     const [details, setDetails] = React.useState<FormValues[]>([]);
+    const [selectedUsers, setSelectedUsers] = React.useState<number[]>([]);
+    const [showAlert, setShowAlert] = React.useState(false);
 
     function addInTable(values: FormValues) {
         setDetails(details => [...details, values]);
     }
 
-    function removeFromTable(index: number) {
-        setDetails(details => details.filter((_, i) => i !== index));
+    function selectUser(index: number) {
+        if (selectedUsers.includes(index)) {
+            setSelectedUsers( //for unselect the selected user
+                selectedUsers.filter((i) => i !== index)
+            );
+        }else { //for select the user
+            setSelectedUsers([...selectedUsers, index]);
+        }
+    }
+
+    function deleteSelectedUsers() {
+        setDetails( // represents the actual user object(actual value). We don't need the user object here, so we use _
+            details.filter((_, index) => !selectedUsers.includes(index))
+        );
+
+        setSelectedUsers([]);
     }
 
     const formik = useFormik({
         initialValues: {
-        firstName: '',
-        lastName: '',
-        email: '',
+            firstName: '',
+            lastName: '',
+            email: '',
         },
         validationSchema: Yup.object({
         firstName: Yup.string()
@@ -63,12 +80,24 @@ export default function Form() {
         onSubmit: values => {
             addInTable(values);
             formik.resetForm();
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 2000);
         },
     });
 
 
     return (
         <>
+            {showAlert && (
+                <Alert className="mx-auto mt-5 max-w-2xl">
+                    <AlertTitle>Success!</AlertTitle>
+                    <AlertDescription>
+                        User added successfully.
+                    </AlertDescription>
+                </Alert>
+            )}
 
             <form onSubmit={formik.handleSubmit} className="mx-auto mt-10 max-w-2xl px-4">
                 <div className=" space-y-6 rounded-xl border border-gray-200 bg-white p-6 ">
@@ -81,7 +110,7 @@ export default function Form() {
                             name="firstName"
                             type="text"
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+
                             value={formik.values.firstName}
                             className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                         />
@@ -99,7 +128,7 @@ export default function Form() {
                             name="lastName"
                             type="text"
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+
                             value={formik.values.lastName}
                             className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                         />
@@ -117,7 +146,7 @@ export default function Form() {
                             name="email"
                             type="email"
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+
                             value={formik.values.email}
                             className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                         />
@@ -137,25 +166,16 @@ export default function Form() {
                     </div>
                 </div>
             </form>
-            <FormTable Details={details} />
+
+            <FormTable Details={details} selectedUsers={selectedUsers} selectUser={selectUser}/>
+            {selectedUsers.length > 0 && (
+                <button
+                    onClick={deleteSelectedUsers}
+                    className="mx-auto mt-5 block rounded-md bg-red-600 px-5 py-2 text-white hover:bg-red-700"
+                >
+                    Delete Selected
+                </button>
+            )}
         </>
     );
 };
-
-
-// import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
-// function App() {
-//   return (
-//     <div className="p-10">
-//       <Alert>
-//         <AlertTitle>Success!</AlertTitle>
-//         <AlertDescription>
-//           Your operation was completed successfully.
-//         </AlertDescription>
-//       </Alert>
-//     </div>
-//   );
-// }
-
-// export default App;

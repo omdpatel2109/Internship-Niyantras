@@ -1,6 +1,13 @@
 import FormTableRow from "./FormTableRow";
+import type { FormValues } from "./Form";
 
-export default function FormTable({ Details }: { Details: any[] }) {
+interface FormTableProps {
+    Details: FormValues[];
+    selectedUsers: number[];
+    selectUser: (index: number) => void;
+}
+
+export default function FormTable({ Details, selectedUsers, selectUser }: FormTableProps) {
     return(
         <>
             <table className="w-3/4 mx-auto border-collapse border border-gray-300 mt-10">
@@ -14,7 +21,10 @@ export default function FormTable({ Details }: { Details: any[] }) {
                 </thead>
                 <tbody>
                     {Details.map((detail, index) => (
-                        <FormTableRow key={index} formValues={detail} />
+                        <FormTableRow key={index} formValues={detail} 
+                        isSelected={selectedUsers.includes(index)} 
+                        onSelect={() => selectUser(index)}
+                        />
                     ))}
                 </tbody>
             </table>

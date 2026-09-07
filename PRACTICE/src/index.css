@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@theme {
+    /* Light Theme */
+    --color-bg-main: white;
+    --color-bg-card: white;
+
+    --color-text-main: black;
+    --color-text-muted: gray;
+
+    --color-primary: blue;
+    --color-primary-hover: darkblue;
+
+    --color-border: lightgray;
+
+    --color-success: green;
+    --color-danger: red;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+    /* Dark Theme */
+    --color-bg-main: black;
+    --color-bg-card: darkgray;
+
+    --color-text-main: white;
+    --color-text-muted: lightgray;
+
+    --color-primary: lightblue;
+    --color-primary-hover: skyblue;
+
+    --color-border: gray;
+
+    --color-success: lightgreen;
+    --color-danger: pink;
+}

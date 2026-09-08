@@ -2,37 +2,12 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import FormTable from './FormTable';
-import { Link } from 'react-router-dom';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export type FormValues = {
-    // index: number;
     firstName: string;
     lastName: string;
     email: string;
-};
-
-
-const validate = (values: FormValues) => {
-    const errors: Partial<Record<keyof FormValues, string>> = {};
-    if(!values.firstName) {
-        errors.firstName = 'Required';
-    }else if (values.firstName.length > 15) {
-        errors.firstName = 'Must be 15 characters or less';
-    }
-    if(!values.lastName) {
-        errors.lastName = 'Required';
-    }else if (values.lastName.length > 20) {
-        errors.lastName = 'Must be 20 characters or less';
-    }
-
-    if(!values.email) {
-        errors.email = 'Required';
-    }else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
-    }
-
-    return errors;
 };
 
 export default function Form() {
@@ -69,13 +44,13 @@ export default function Form() {
             email: '',
         },
         validationSchema: Yup.object({
-        firstName: Yup.string()
-            .max(15, 'Must be 15 characters or less')
-            .required('Required'),
-        lastName: Yup.string()
-            .max(20, 'Must be 20 characters or less')
-            .required('Required'),
-        email: Yup.string().email('Invalid email address').required('Required'),
+            firstName: Yup.string()
+                .max(15, 'Must be 15 characters or less')
+                .required('Required'),
+            lastName: Yup.string()
+                .max(20, 'Must be 20 characters or less')
+                .required('Required'),
+            email: Yup.string().email('Invalid email address').required('Required'),
         }),
         onSubmit: values => {
             addInTable(values);
@@ -92,7 +67,7 @@ export default function Form() {
         <>
             {showAlert && (
                 <Alert className="mx-auto mt-5 max-w-2xl">
-                    <AlertTitle>Success!</AlertTitle>
+                    <AlertTitle className="font-bold text-success">Success!</AlertTitle>
                     <AlertDescription>
                         User added successfully.
                     </AlertDescription>
@@ -110,7 +85,7 @@ export default function Form() {
                             name="firstName"
                             type="text"
                             onChange={formik.handleChange}
-
+                            onBlur={formik.handleBlur}
                             value={formik.values.firstName}
                             className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                         />
@@ -128,7 +103,7 @@ export default function Form() {
                             name="lastName"
                             type="text"
                             onChange={formik.handleChange}
-
+                            onBlur={formik.handleBlur}
                             value={formik.values.lastName}
                             className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                         />
@@ -146,7 +121,7 @@ export default function Form() {
                             name="email"
                             type="email"
                             onChange={formik.handleChange}
-
+                            onBlur={formik.handleBlur}
                             value={formik.values.email}
                             className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                         />
@@ -169,12 +144,14 @@ export default function Form() {
 
             <FormTable Details={details} selectedUsers={selectedUsers} selectUser={selectUser}/>
             {selectedUsers.length > 0 && (
-                <button
-                    onClick={deleteSelectedUsers}
-                    className="mx-auto mt-5 block rounded-md bg-red-600 px-5 py-2 text-white hover:bg-red-700"
-                >
-                    Delete Selected
-                </button>
+                <div className="flex justify-center">
+                    <button
+                        onClick={deleteSelectedUsers}
+                        className="mx-auto mt-5 rounded-md bg-red-600 px-5 py-2 text-white hover:bg-red-700"
+                    >
+                        Delete Selected
+                    </button>
+                </div>
             )}
         </>
     );

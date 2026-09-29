@@ -53,7 +53,7 @@ function App() {
         className={isLoading === "delete" ? "py-2 w-30 border rounded-md bg-gray-400 m-5" : 
           "py-2 w-30 border rounded-md bg-red-500 m-5 "}
       >
-        {isLoading === "delete" ? "Deleting..." : "Delete"}
+        {isLoading === "delete" ? "Deleting..." : "Delete"} //disable
       </button>
 
       <button

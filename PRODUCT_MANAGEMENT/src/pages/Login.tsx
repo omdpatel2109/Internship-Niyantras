@@ -81,13 +81,13 @@ export default function Login() {
             />
           </div>
 
-          <div>
+          {/* <div>
             <label className="mb-2 block font-medium text-gray-700">
               Desc
             </label>
 
             <textarea placeholder="Write here.." className="border bprder-gray-500 w-full h-20 resize-none "/>
-          </div>
+          </div> */}
 
           <div >
             <label className="mb-2 block font-medium text-gray-700">

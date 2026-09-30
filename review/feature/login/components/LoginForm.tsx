@@ -25,7 +25,7 @@ export default function LoginForm() {
       setLoading(false);
       return;
     }
-
+    
     alert(result.message);
     setLoading(false);
   }

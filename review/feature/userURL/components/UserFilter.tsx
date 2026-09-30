@@ -57,32 +57,33 @@ export default function UserFilters(){
     });
 
     if(loading){
-        <div className="block flex justify-center items-center">
-            return <p>Loading users...</p>;
-        </div>
+        // Fixed syntax bug from original component while preserving design intent
+        return (
+            <div className="flex h-48 justify-center items-center">
+                <p className="text-sm font-medium text-gray-500">Loading users...</p>
+            </div>
+        );
     }
 
     return(
-        <div className="w-full mx-auto p-6">
-            <h1 className="text-2xl font-bold text-center mb-2 border border-b 
-            rounded-md bg-gray-500">Users</h1>
+        <div className="w-full mx-auto p-6 max-w-7xl">
+            <h1 className="text-2xl font-bold text-gray-900 mb-6">Users</h1>
 
-            <div className="grid grid-cols-3 gap-20 border p-2 bg-gray-100">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border border-gray-200 p-5 rounded-xl bg-gray-100 mb-6">
                 <div>
-                    <label className="mr-2">Search</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Search</label>
                     <input
                         type="text"
-                        placeholder="Search user"
+                        placeholder="Search user..."
                         value={search}
-                        onChange={(e) =>
-                        updateFilter("search", e.target.value)
-                        }
-                        className="border p-2 rounded w-full mb-3"
+                        onChange={(e) =>updateFilter("search", e.target.value)}
+                        className="border border-gray-300 p-2.5 rounded-lg w-full text-sm text-gray-900 placeholder-gray-400 
+                        bg-white focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
                     />
                 </div>
 
                 <div>
-                    <label className="mr-2">Minimum age</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Minimum age</label>
                     <input
                         type="number"
                         placeholder="Minimum age"
@@ -90,38 +91,41 @@ export default function UserFilters(){
                         onChange={(e) =>
                         updateFilter("age", e.target.value)
                         }
-                        className="border p-2 rounded w-full mb-3"
+                        className="border border-gray-300 p-2.5 rounded-lg w-full text-sm text-gray-900 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                     />
                 </div>
 
                 <div>
-                    <label className="mr-2">gender</label>
-                    <select className="border p-2 rounded w-full mb-3 h-10.5" value={gender}
-                    onChange={(e) => updateFilter("gender", e.target.value)}>
-                        <option>Select Gender</option>
-                        <option>Male</option>
-                        <option>Female</option>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Gender</label>
+                    <select 
+                        className="border border-gray-300 p-2.5 rounded-lg w-full text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" 
+                        value={gender}
+                        onChange={(e) => updateFilter("gender", e.target.value)}
+                    >
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                 </div>
             </div>
 
-            <p className="mb-2 mt-2">
-                Showing {filteredUsers.length} of {users.length} users
+            <p className="text-sm font-medium text-gray-500 mb-4 pl-1">
+                Showing <span className="font-semibold text-gray-800">{filteredUsers.length}</span> of <span className="font-semibold text-gray-800">{users.length}</span> users
             </p>
             
-            <div className="grid grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {filteredUsers.map((user) => (
                     <div key={user.id}
-                        className="border p-3 mb-2 rounded">
-                        <p className="font-semibold">
+                        className="border border-gray-200 p-4 rounded-xl bg-white shadow-sm hover:shadow-md">
+                        <p className="font-semibold text-gray-900 mb-2">
                             {user.firstName} {user.lastName}
                         </p>
 
-                        <p>Age: {user.age}</p>
-                        <p>Gender: {user.gender}</p>
+                        <p><span className="text-gray-400 font-medium">Age:</span> {user.age}</p>
+                        <p><span className="text-gray-400 font-medium">Gender:</span> {user.gender}</p>
                     </div>
                 ))}
             </div>
         </div>
     );
-    }
+}

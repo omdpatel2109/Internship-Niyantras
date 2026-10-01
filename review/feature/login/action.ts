@@ -1,11 +1,15 @@
 "use server";
 
 import api from "@/lib/api";
+import {cookies} from "next/headers";
+
 
 export async function loginAction(
   username: string,
   password: string
 ) {
+
+
   try{
     const response = await api.post(
       "/auth/login",
@@ -14,6 +18,16 @@ export async function loginAction(
         password,
       }
     );
+    const cookieStore = await cookies();
+    cookieStore.set("access_token", response.data.accessToken, {
+        httpOnly: true, //prevent client-side JavaScript from accessing the cookie
+        secure: process.env.NODE_ENV === "production",
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      }
+    )
+
 
     return{
       success: true,
@@ -23,6 +37,7 @@ export async function loginAction(
   }catch(error: any){
     const status = error.response?.status;
     const backendMessage = error.response?.data?.message;
+
 
     if (status === 400 && backendMessage === "Username and password required"){
       return {
@@ -41,7 +56,7 @@ export async function loginAction(
 
     return{
       success: false,
-      message: "Something went wrong.",
+      message: error.response?.data?.message || "An error occurred during login.",
     };
   }
 }

@@ -1,12 +1,5 @@
 "use server";
-
-export type User = {
-    id: number;
-    firstName: string;
-    lastName: string;
-    age: number;
-    gender: string;
-};
+import type {User} from "@/lib/types";
 
 export async function getUsers(): Promise<User[]> {
     const response = await fetch("https://dummyjson.com/users");

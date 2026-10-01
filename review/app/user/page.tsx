@@ -1,10 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getUsers, User } from "@/lib/userApi";
+import { getUsers} from "@/lib/userApi";
+import UsersCard from "@/components/UserCard";
 
 export default function UsersPage() {
     const [search, setSearch] = useState("");
+
+    const [visibleUsers, setVisibleUsers] = useState(10);
 
     const {data: users = [], isLoading} = useQuery({
         queryKey: ["users"],
@@ -21,6 +24,7 @@ export default function UsersPage() {
     function handleSearch(value: string) {
         setSearch(value);
         sessionStorage.setItem("userSearch", value);
+        // setCurrentPage(1);
     }
 
     const filteredUsers = users.filter((user) => {
@@ -29,6 +33,8 @@ export default function UsersPage() {
 
         return name.includes(search.toLowerCase());
     });
+
+    const visibleUser = filteredUsers.slice(0, visibleUsers);
 
     if (isLoading) {
         return (
@@ -55,19 +61,24 @@ export default function UsersPage() {
                 />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {filteredUsers.map((user) => (
-                    <div key={user.id}
-                        className="border border-gray-200 p-4 rounded-xl bg-white shadow-sm hover:shadow-md ">
-                        <p className="font-semibold text-base text-gray-900 mb-2">
-                            {user.firstName} {user.lastName}
-                        </p>
-
-                        <p><span className="text-gray-400 font-medium">Age:</span> {user.age}</p>
-                        <p><span className="text-gray-400 font-medium">Gender:</span> {user.gender}</p>
+            <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    {visibleUser.map((user) => (
+                        <UsersCard key={user.id} user={user} />
+                    ))}
+                </div>
+                    {visibleUser.length < filteredUsers.length && (
+                    <div className="flex justify-center mt-6">
+                        <button
+                            onClick={() => setVisibleUsers((prev) => prev + 10)}
+                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 block"
+                        >
+                            Load More
+                        </button>
                     </div>
-                ))}
+                )}
             </div>
+            
         </div>
     );
 }

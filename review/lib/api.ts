@@ -5,13 +5,13 @@ const api = axios.create({
     baseURL: "https://dummyjson.com",
 });
 
-// AUTHENTICATION INTERCEPTOR
+// Authentication Interceptor
 api.interceptors.request.use(
     async (config) => {
         const cookieStore = await cookies();
 
-        const token = cookieStore.get("token")?.value;
-
+        const token = cookieStore.get('access_token')?.value;
+        
         if(token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -19,12 +19,13 @@ api.interceptors.request.use(
         return config;
     },
     (error) => {
-        return Promise.reject(error);
+        console.error("Request error:", error);
+        return error;
     }
     
 );
 
-// HEADERS INTERCEPTOR
+// Headers Interceptor
 api.interceptors.request.use(
     (config) => {
         config.headers["Content-Type"] = "application/json"; // the send in JSON
@@ -34,20 +35,25 @@ api.interceptors.request.use(
         return config;
     },
     (error) => {
-        return Promise.reject(error);
+        console.error("Request error:", error);
+        return error;
     }
 );
 
-//  RESPONSE INTERCEPTOR
+// Response Interceptor
 api.interceptors.response.use(
-    (response) => {
-        console.log("Response Status:",response.status);
+  (response) => {
+    console.log("Response Status:", response.status);
+    return response;
+  },
+  (error) => {
+    console.error(
+      "Response error:",
+      error.response?.data || error.message
+    );
 
-        return response.data;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
+    return error;
+  }
 );
 
 export default api;

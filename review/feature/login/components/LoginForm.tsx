@@ -5,6 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
+import {Eye, EyeOff} from "lucide-react";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export default function LoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault();
@@ -26,7 +28,12 @@ export default function LoginForm() {
     }
     
     alert(result.message);
+    // console.log("Token:", result.token);
     setLoading(false);
+  }
+  
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
   }
 
   return (
@@ -47,14 +54,23 @@ export default function LoginForm() {
         
         <div>
           <label className="block text-sm font-semibold text-gray-700">Password</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            placeholder="Enter password" 
-            className="block w-full border rounded-lg border-gray-300 bg-gray-100 p-2.5 mt-1.5 mb-4 text-sm text-gray-900 
-            placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all" 
-          />
+          <div className="relative w-full">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              placeholder="Enter password" 
+              className="block w-full border rounded-lg border-gray-300 bg-gray-100 p-2.5 pr-10 mt-1.5 mb-4 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+            /> 
+            <button 
+              type="button" 
+              onClick={togglePassword}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+            > 
+              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />} 
+            </button> 
+          </div>
+
         </div>
 
         <div>

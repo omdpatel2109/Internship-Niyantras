@@ -21,10 +21,10 @@ export async function loginAction(
     const cookieStore = await cookies();
     cookieStore.set("access_token", response.data.accessToken, {
         httpOnly: true, //prevent client-side JavaScript from accessing the cookie
-        secure: process.env.NODE_ENV === "production",
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7, // 7 days
+        secure: process.env.NODE_ENV === "production", // check http and https
+        sameSite: 'lax',  //prevenet from external link
+        path: '/', // cookie is accessible from the entire site
+        maxAge: 60 * 60 * 24 * 7, // 7 days cookie available
       }
     )
 

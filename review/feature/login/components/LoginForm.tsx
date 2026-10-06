@@ -28,7 +28,6 @@ export default function LoginForm() {
     }
     
     alert(result.message);
-    // console.log("Token:", result.token);
     setLoading(false);
   }
   

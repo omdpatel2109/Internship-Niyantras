@@ -27,8 +27,7 @@ export async function loginAction(
         maxAge: 60 * 60 * 24 * 7, // 7 days cookie available
       }
     )
-
-
+  
     return{
       success: true,
       message: "Login successful",
